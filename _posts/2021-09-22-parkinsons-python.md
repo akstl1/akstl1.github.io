@@ -2,15 +2,7 @@
 layout: post
 title: Parkinson's Detection
 image: "/posts/parkinsons_image.jpg"
-tags: [Python, Coffee]
----
-
-# My first project
-## is all about
-### how much
-#### I LOVE
-##### Python & Coffee!
-
+tags: [Python, Parkinson's, Classification]
 ---
 
 Firstly, I love Python so much, here is some code!
