@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Parkinson's Detection
-image: "/posts/parkinsons_image.jpg"
+image: "../img/parkinsons_image.jpg"
 tags: [Python, Coffee]
 ---
 
