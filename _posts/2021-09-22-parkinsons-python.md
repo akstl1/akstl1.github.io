@@ -5,7 +5,7 @@ image: "/posts/parkinsons_image.jpg"
 tags: [Python, Parkinson's, Classification]
 ---
 
-Firstly, I love Python so much, here is some code!
+# Insert Intro Here
 
 ```
 my_love_for_python = 0
@@ -16,7 +16,40 @@ for day in lifetime:
     my_python_knowledge += 1
 ```
 
-Just so you really see how much I love Python, here is some code BUT with some colours for keywords & functionality!
+
+---
+
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.utils import shuffle
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix,plot_confusion_matrix,accuracy_score,precision_score,recall_score,f1_score
+from sklearn.preprocessing import OneHotEncoder,MinMaxScaler
+from sklearn.inspection import permutation_importance
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.feature_selection import RFECV
+
+from sklearn.linear_model import LogisticRegression
+
+
+import os
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+```
+
+
+
+
+
+
+
+
+<!-- Just so you really see how much I love Python, here is some code BUT with some colours for keywords & functionality!
 
 ```python
 my_love_for_python = 0
@@ -56,6 +89,6 @@ A line break, like this one below - helps me make sense of what I'm reading, esp
 ---
 
 I could also add things to my project like links, tables, quotes, and HTML blocks - but I'm starting to get a cracking headache.  Must be coffee time.
-
+ -->
 <!-- <iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=d678e41c-01d8-4402-8405-23b635476160&autoAuth=true&ctid=5ebbcbe0-fcd6-4376-b0ed-e060d29cb79e&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLW5vcnRoLWNlbnRyYWwtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D" frameborder="0" allowFullScreen="true"></iframe>
  -->
