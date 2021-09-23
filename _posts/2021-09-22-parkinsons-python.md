@@ -18,6 +18,9 @@ for day in lifetime:
 
 
 ---
+## Discover
+
+### Load Relevant Libraries for the project
 
 ```python
 import pandas as pd
@@ -35,13 +38,49 @@ from sklearn.feature_selection import RFECV
 
 from sklearn.linear_model import LogisticRegression
 
-
-import os
-for dirname, _, filenames in os.walk('/kaggle/input'):
-    for filename in filenames:
-        print(os.path.join(dirname, filename))
 ```
 
+### Load Data
+
+```python
+data = pd.read_csv('../input/parkinsons-data-set/parkinsons.data')
+
+```
+
+### Perform EDA
+
+
+```python
+data.head()
+```
+
+```python
+data.drop('name',axis=1,inplace=True)
+```
+
+```python
+data.info()
+
+```
+
+
+
+```python
+data = shuffle(data,random_state=42)
+```
+
+```python
+data['status'].value_counts(normalize=True) 
+```
+
+### Split Data for Analysis
+
+```python
+X=data.drop('status',axis=1)
+y=data['status']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+```
 
 
 
