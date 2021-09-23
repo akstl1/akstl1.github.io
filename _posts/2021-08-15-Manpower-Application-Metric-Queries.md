@@ -28,15 +28,16 @@ data, edit as needed to ensure accuracy, and approve the final report submission
 feature, inaccurate data could be used in final analytics and skew manpower metrics. 
 
 With this in place, I helped develop analytical tables for our project staff. The key table I 
-developed displayed approval status and summary manpower values. A mockup of this table is 
+developed displayed approval status and summary manpower values. The table allows project managers to view manpower trends on a project for any date range at a 
+glance, a feature not available on previously used software. With these trends, project managers 
+can now more easily do the following:
+
+<!-- A mockup of this table is 
 shown below. Each column represents a date, and each row represents the manpower of a given 
 subcontractor per day. If a subcontractor submits a report, that day’s cell turns green for that 
 contractor. If a subcontractor is supposed to be working but did not submit a report their cell will 
-appear red. A cell appears white if no workers are needed that day.  
+appear red. A cell appears white if no workers are needed that day.   -->
  
-The table allows project managers to view manpower trends on a project for any date range at a 
-glance, a feature not available on previously used software. With these trends, project managers 
-can now more easily do the following:
 
 1. Determine which subcontractors are scheduled to be on site, and why scheduled 
 contractors are not on site. This helps managers determine whether a project is on-time, 
