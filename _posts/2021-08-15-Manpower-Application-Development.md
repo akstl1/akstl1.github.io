@@ -135,7 +135,7 @@ not be check.
 
 ## Accuracy
 
-```
+```sql
 /*query to determine accuracy - how many entries had clark overrides */
 /*Query structure: 
 -sum case when Clark has overridden any aspect of the daily report
@@ -340,7 +340,7 @@ order by R1.Yr, R1.Week
 ```
 ## Compliance
 
-```mySQL
+```python
 
 
 /*Query to find total scheduled submissions and total non-duplicate submissions received
