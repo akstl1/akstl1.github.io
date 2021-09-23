@@ -340,7 +340,7 @@ order by R1.Yr, R1.Week
 ```
 ## Compliance
 
-```python
+```sql
 
 
 /*Query to find total scheduled submissions and total non-duplicate submissions received
@@ -671,7 +671,7 @@ order by R1.YR, R1.WK
 
 ## Timeliness
 
-```mySQL
+```sql
 /*Queries to determine whether contractors submitted reports within 48 hours of peforming work
 
 structure:
@@ -836,7 +836,7 @@ order by R1.YR, R1.WK
 
 ## Timely Compliance
 
-```mySQL
+```sql
 
 /*Query to find total  submissions thjat were on time and submitted by unique subs*/
 
@@ -962,7 +962,7 @@ order by R1.YR, R1.WK
 
 ## Validation
 
-```mySQL
+```sql
 
 /*Query to determine how many reports Clark has approved (valiated)
 
