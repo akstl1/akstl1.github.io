@@ -167,6 +167,108 @@ When running the above code, we get an f1 score of 0.9589.....
 
 ### Random Forest Classification Analysis
 
+```python
+data.describe()
+```
+
+No categorical vars to encode!
+
+```python
+scaler = MinMaxScaler()
+
+X_train_knn = pd.DataFrame(scaler.fit_transform(X_train),columns=X_train.columns) #return as df
+X_test_knn = pd.DataFrame(scaler.transform(X_test),columns=X_test.columns) #return as df
+```
+
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+
+clf = RandomForestClassifier(random_state=42)
+
+feature_selector = RFECV(clf, cv=5)
+
+fit=feature_selector.fit(X_train_knn,y_train)
+
+optimal_feature_count = feature_selector.n_features_
+print(f'the optimal number of features is: {optimal_feature_count}')
+
+X_train_knn = X_train_knn.loc[:,feature_selector.get_support()]
+X_test_knn = X_test_knn.loc[:,feature_selector.get_support()]
+
+#understand how much better it is to have 2 vars than any other #
+
+plt.plot(range(1,len(fit.grid_scores_)+1),fit.grid_scores_,marker='o')
+#range used so x axis goes from 1 to 4 features rather than starting at 0
+#second fit is the scores for each number of vars
+plt.ylabel("model score")
+plt.xlabel('number of features')
+plt.title(f'Feature Selection using RFE \n Optimal number of features is {optimal_feature_count} (at score of {round(max(fit.grid_scores_),3)})')
+plt.tight_layout()
+plt.show()
+```
+
+
+```python
+clf=KNeighborsClassifier()
+clf.fit(X_train_knn,y_train)
+```
+
+```python
+y_pred_class = clf.predict(X_test_knn)
+y_pred_proba = clf.predict_proba(X_test_knn)[:,1]
+
+
+confusion_matrix(y_test, y_pred_class)
+
+plot_confusion_matrix(clf,X_test_knn,y_test,cmap='coolwarm')
+
+#Accuracy ((# of correct classifactions out of all attempted classifications))
+
+accuracy_score(y_test,y_pred_class)
+
+# Precision (of all observations that were predicted +, how many were actually +)
+precision_score(y_test,y_pred_class)
+
+#Recall (of all + observations, how many did we predict as +)
+recall_score(y_test,y_pred_class)
+
+#f1 score (harmonic mean of recall and precision)
+f1_score(y_test,y_pred_class)
+```
+
+INSERT CONFUSION MATRIX HERE
+
+```python
+k_list = list(range(2,25))
+
+accuracy_scores= []
+for k in k_list:
+    clf= KNeighborsClassifier(n_neighbors=k)
+    clf.fit(X_train_knn,y_train)
+    y_pred=clf.predict(X_test_knn)
+    accuracy = f1_score(y_test,y_pred)
+    accuracy_scores.append(accuracy)
+
+max_accuracy = max(accuracy_scores)
+max_accuracy_idx = accuracy_scores.index(max_accuracy)
+optimal_k_value = k_list[max_accuracy_idx]
+
+#plot of max depths
+
+plt.plot(k_list,accuracy_scores)
+plt.scatter(optimal_k_value,max_accuracy,marker='x',color='red')
+plt.title(f"Accuracy (F1 Score) by K \n Optimal Value for K: {optimal_k_value} (Accuracy: {round(max_accuracy,4)})")
+plt.xlabel('k')
+plt.ylabel('accuracy (F1 Score)')
+plt.tight_layout()
+plt.show()
+```
+
+
+
+
 
 
 
