@@ -135,7 +135,7 @@ not be check.
 
 ## Accuracy
 
-```SQL
+```
 /*query to determine accuracy - how many entries had clark overrides */
 /*Query structure: 
 -sum case when Clark has overridden any aspect of the daily report
