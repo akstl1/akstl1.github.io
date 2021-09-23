@@ -121,6 +121,7 @@ plt.tight_layout()
 plt.show()
 ```
 <img src="/img/parkinsonsLR.png" >
+
 ```python
 clf=LogisticRegression(random_state=42,max_iter=1000)
 clf.fit(X_train_lr,y_train)
