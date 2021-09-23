@@ -32,36 +32,51 @@ from sklearn.linear_model import LogisticRegression
 
 ### Load Data
 
+First, the Parkinson's dataset is loaded. This data was gathered from Kaggle (https://www.kaggle.com/nidaguler/parkinsons-data-set).
+
 ```python
 data = pd.read_csv('../input/parkinsons-data-set/parkinsons.data')
 
 ```
 
+### Prepare Data
+
+The dataset used for this project, provided by Max Little of Oxford, was cleaned/formatted prior to it being posted on Kaggle for public use. Luckily, that means all we have to do is drop the 'name' column since it only contains unique identifiers/keys. This is done in the next section.
+
 ### Perform EDA
 
-
-```python
-data.head()
-```
-
+First, we can drop the 'name' column as mentioned above. 
 ```python
 data.drop('name',axis=1,inplace=True)
 ```
+
+Next, we can get the head of the data to see the general data formatting and structure 
+```python
+data.head()
+```
+From the head call, we see that there are 24 columns and each of them is numeric. Glancing quickly at the columns we can see the columns are not all on the same scale, so some scaling will need to take place before analysis can occur.
+
+We can also look to see if there are any null values in our data.
 
 ```python
 data.info()
 
 ```
 
+The info call shows that each column has 195 non-null values, so there is no need to analyze further for rows with incomplete data.
 
-
+Before splitting the data for analysis, we want to make sure the data is shuffled. If the data was ordered in a particular way to start, shuffling will help ensure that the train/test data sets are more likely to be representative of the whole data set.
 ```python
 data = shuffle(data,random_state=42)
 ```
 
+As noted by the original authors, many of the people tested had Parkinson's disease. We want to make sure that our data isn't too imbalanced, or else further data preparation may be needed to account for such imbalance. We do this by determining the percent of recordings that had a positive status for Parkinson's Disease.
+
 ```python
 data['status'].value_counts(normalize=True) 
 ```
+
+Running the above code, we find that 75% of rows have a positive status. Though this indicates that there are more positive instances, there should be enough instances of both positive and negative results to continue with the analysis without further preparation.
 
 ### Split Data for Analysis
 
