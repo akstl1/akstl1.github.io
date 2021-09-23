@@ -349,4 +349,772 @@ on (R1.Week=R2.Week) and (R1.Yr = R2.Yr)
 WHERE R1.Yr > 1901
 order by R1.Yr, R1.Week
 ```
+## Compliance
+
+```mySQL
+
+
+/*Query to find total scheduled submissions and total non-duplicate submissions received
+Structure:
+-count total daily report submissions per day by unique subcontractor numbers
+-unique submissions are determined as follows
+--a table is created to count submissions per day
+--if 1 submission is made by a party with a given contract #, count will equal 1
+--if there are multiple submissions by parties with the same contract #, then the count will be changed to equal 1. this removes counting multuiple submissions by a single party per day.
+
+*/
+
+/*
+SELECT T1.WK, T1.YR, T1. Total_Submissions_No_Duplicates, T2.[Total Submissions Schduled],LEFT(100* T1.Total_Submissions_No_Duplicates/CAST(T2.[Total Submissions Schduled] AS DECIMAL),5) AS Compliance_Percentage_Weekly
+FROM
+(
+SELECT DATEPART(week,R1.DateActivity) AS WK, DATEPART(year,R1.DateActivity) as YR, count(*) AS Total_Submissions_No_Duplicates
+FROM
+(
+
+SELECT R1.DateActivity, R1.ContractNumber, case when count(*)>=1 then 1 else 0 end AS Total_Submissions
+FROM [RDODS].[DDPM].[DDRMaster] R1
+group by R1.DateActivity, R1.ContractNumber
+
+) R1
+group by DATEPART(week,R1.DateActivity), DATEPART(year,R1.DateActivity)
+
+) T1
+
+JOIN
+
+(
+
+SELECT 
+  DATEPART(YEAR, DATE) AS YR, 
+  DATEPART(wk, DATE) AS WK, 
+  1.0*count(*) AS [Total Submissions Schduled]
+  FROM [RDODS].[DDPM].[DDRDailySummaryAndCompliance]
+ WHERE  
+	((ScheduledToBeOnSiteFlag is Not Null)
+	and Date < GETDATE() 
+	And CalendarDayType = 1 
+	AND Date > '2019-06-11')
+	OR (WorkersOnSiteCount is Not Null and Date < GETDATE() AND Date > '2019-06-11')
+ GROUP BY DATEPART(wk, DATE), DATEPART(YEAR, DATE)
+
+ ) T2
+
+on (T1.WK = T2.WK) and (T1.YR=T2.YR)
+order by T1.YR, T1.WK
+*/
+
+/*======================================================================================================================================*/
+/*======================================================================================================================================*/
+
+
+/*Query to find total cumulative scheduled submissions and total non-duplicate submissions received
+Structure:
+-Join the code used above to find weekly accuracy % to itself on the following conditions
+-the week/year of the value in the left table is greater or equal to that of the right table
+-this join allows us to sum total reports to date for each week, and divide the number of reports
+-that had no over-rides by the total number of reports. this is the cumulative compliance to date
+*/
+
+/*
+ SELECT R1.WK, R1.YR,LEFT(100*Sum(R2.Total_Submissions_No_Duplicates)/Sum(R2.[Total Submissions Schduled]),5) AS Compliance_Percentage_Cumulative FROM 
+(
+
+
+SELECT T1.WK, T1.YR, T1. Total_Submissions_No_Duplicates, T2.[Total Submissions Schduled],LEFT(100* T1.Total_Submissions_No_Duplicates/CAST(T2.[Total Submissions Schduled] AS DECIMAL),5) AS Compliance_Percentage_Weekly
+FROM
+(
+SELECT DATEPART(week,R1.DateActivity) AS WK, DATEPART(year,R1.DateActivity) as YR, count(*) AS Total_Submissions_No_Duplicates
+FROM
+(
+
+SELECT R1.DateActivity, R1.ContractNumber, case when count(*)>=1 then 1 else 0 end AS Total_Submissions
+FROM [RDODS].[DDPM].[DDRMaster] R1
+group by R1.DateActivity, R1.ContractNumber
+
+) R1
+group by DATEPART(week,R1.DateActivity), DATEPART(year,R1.DateActivity)
+
+) T1
+
+JOIN
+
+(
+
+SELECT 
+  DATEPART(YEAR, DATE) AS YR, 
+  DATEPART(wk, DATE) AS WK, 
+  1.0*count(*) AS [Total Submissions Schduled]
+  FROM [RDODS].[DDPM].[DDRDailySummaryAndCompliance]
+ WHERE  
+	((ScheduledToBeOnSiteFlag is Not Null)
+	and Date < GETDATE() 
+	And CalendarDayType = 1 
+	AND Date > '2019-06-11')
+	OR (WorkersOnSiteCount is Not Null and Date < GETDATE() AND Date > '2019-06-11')
+ GROUP BY DATEPART(wk, DATE), DATEPART(YEAR, DATE)
+
+ ) T2
+
+on (T1.WK = T2.WK) and (T1.YR=T2.YR)
+
+
+
+) R1
+
+JOIN
+
+
+(
+
+
+
+
+SELECT T1.WK, T1.YR, T1. Total_Submissions_No_Duplicates, T2.[Total Submissions Schduled],LEFT(100* T1.Total_Submissions_No_Duplicates/CAST(T2.[Total Submissions Schduled] AS DECIMAL),5) AS Compliance_Percentage_Weekly
+FROM
+(
+SELECT DATEPART(week,R1.DateActivity) AS WK, DATEPART(year,R1.DateActivity) as YR, count(*) AS Total_Submissions_No_Duplicates
+FROM
+(
+
+SELECT R1.DateActivity, R1.ContractNumber, case when count(*)>=1 then 1 else 0 end AS Total_Submissions
+FROM [RDODS].[DDPM].[DDRMaster] R1
+group by R1.DateActivity, R1.ContractNumber
+
+) R1
+group by DATEPART(week,R1.DateActivity), DATEPART(year,R1.DateActivity)
+
+) T1
+
+JOIN
+
+(
+
+SELECT 
+  DATEPART(YEAR, DATE) AS YR, 
+  DATEPART(wk, DATE) AS WK, 
+  1.0*count(*) AS [Total Submissions Schduled]
+  FROM [RDODS].[DDPM].[DDRDailySummaryAndCompliance]
+ WHERE  
+	((ScheduledToBeOnSiteFlag is Not Null)
+	and Date < GETDATE() 
+	And CalendarDayType = 1 
+	AND Date > '2019-06-11')
+	OR (WorkersOnSiteCount is Not Null and Date < GETDATE() AND Date > '2019-06-11')
+ GROUP BY DATEPART(wk, DATE), DATEPART(YEAR, DATE)
+
+ ) T2
+
+on (T1.WK = T2.WK) and (T1.YR=T2.YR)
+
+
+
+
+) R2
+
+on ((R1.WK >= R2.WK) and (R1.YR = R2.YR)) OR (R1.YR>R2.YR)
+GROUP BY R1.WK, R1.YR 
+order by R1.YR, R1.WK
+*/
+
+
+/*======================================================================================================================================*/
+/*======================================================================================================================================*/
+
+
+/*Query to find total scheduled submissions and total non-duplicate submissions received. Joining Weekly and cumulative % tables to see both these values for a given week*/
+
+
+
+
+
+Select R1.WK,R1.YR,R1.Compliance_Percentage_Weekly,R2.Compliance_Percentage_Cumulative FROM
+/*Combining queries above. Now will have weekly and cumulative averages in the same table*/
+(
+SELECT T1.WK, T1.YR, T1. Total_Submissions_No_Duplicates, T2.[Total Submissions Schduled],LEFT(100* T1.Total_Submissions_No_Duplicates/CAST(T2.[Total Submissions Schduled] AS DECIMAL),5) AS Compliance_Percentage_Weekly
+FROM
+(
+SELECT DATEPART(week,R1.DateActivity) AS WK, DATEPART(year,R1.DateActivity) as YR, count(*) AS Total_Submissions_No_Duplicates
+FROM
+(
+
+SELECT R1.DateActivity, R1.ContractNumber, case when count(*)>=1 then 1 else 0 end AS Total_Submissions
+FROM [RDODS].[DDPM].[DDRMaster] R1
+group by R1.DateActivity, R1.ContractNumber
+
+) R1
+group by DATEPART(week,R1.DateActivity), DATEPART(year,R1.DateActivity)
+
+) T1
+
+JOIN
+
+(
+
+SELECT 
+  DATEPART(YEAR, DATE) AS YR, 
+  DATEPART(wk, DATE) AS WK, 
+  1.0*count(*) AS [Total Submissions Schduled]
+  FROM [RDODS].[DDPM].[DDRDailySummaryAndCompliance]
+ WHERE  
+	((ScheduledToBeOnSiteFlag is Not Null)
+	and Date < GETDATE() 
+	And CalendarDayType = 1 
+	AND Date > '2019-06-11')
+	OR (WorkersOnSiteCount is Not Null and Date < GETDATE() AND Date > '2019-06-11')
+ GROUP BY DATEPART(wk, DATE), DATEPART(YEAR, DATE)
+
+ ) T2
+
+on (T1.WK = T2.WK) and (T1.YR=T2.YR)
+
+
+) R1
+
+JOIN
+
+(
+
+ SELECT R1.WK, R1.YR,LEFT(100*Sum(R2.Total_Submissions_No_Duplicates)/Sum(R2.[Total Submissions Schduled]),5) AS Compliance_Percentage_Cumulative FROM 
+(
+
+
+SELECT T1.WK, T1.YR, T1. Total_Submissions_No_Duplicates, T2.[Total Submissions Schduled],LEFT(100* T1.Total_Submissions_No_Duplicates/CAST(T2.[Total Submissions Schduled] AS DECIMAL),5) AS Compliance_Percentage_Weekly
+FROM
+(
+SELECT DATEPART(week,R1.DateActivity) AS WK, DATEPART(year,R1.DateActivity) as YR, count(*) AS Total_Submissions_No_Duplicates
+FROM
+(
+
+SELECT R1.DateActivity, R1.ContractNumber, case when count(*)>=1 then 1 else 0 end AS Total_Submissions
+FROM [RDODS].[DDPM].[DDRMaster] R1
+group by R1.DateActivity, R1.ContractNumber
+
+) R1
+group by DATEPART(week,R1.DateActivity), DATEPART(year,R1.DateActivity)
+
+) T1
+
+JOIN
+
+(
+
+SELECT 
+  DATEPART(YEAR, DATE) AS YR, 
+  DATEPART(wk, DATE) AS WK, 
+  1.0*count(*) AS [Total Submissions Schduled]
+  FROM [RDODS].[DDPM].[DDRDailySummaryAndCompliance]
+ WHERE  
+	((ScheduledToBeOnSiteFlag is Not Null)
+	and Date < GETDATE() 
+	And CalendarDayType = 1 
+	AND Date > '2019-06-11')
+	OR (WorkersOnSiteCount is Not Null and Date < GETDATE() AND Date > '2019-06-11')
+ GROUP BY DATEPART(wk, DATE), DATEPART(YEAR, DATE)
+
+ ) T2
+
+on (T1.WK = T2.WK) and (T1.YR=T2.YR)
+
+
+
+) R1
+
+JOIN
+
+
+(
+
+
+
+
+SELECT T1.WK, T1.YR, T1. Total_Submissions_No_Duplicates, T2.[Total Submissions Schduled],LEFT(100* T1.Total_Submissions_No_Duplicates/CAST(T2.[Total Submissions Schduled] AS DECIMAL),5) AS Compliance_Percentage_Weekly
+FROM
+(
+SELECT DATEPART(week,R1.DateActivity) AS WK, DATEPART(year,R1.DateActivity) as YR, count(*) AS Total_Submissions_No_Duplicates
+FROM
+(
+
+SELECT R1.DateActivity, R1.ContractNumber, case when count(*)>=1 then 1 else 0 end AS Total_Submissions
+FROM [RDODS].[DDPM].[DDRMaster] R1
+group by R1.DateActivity, R1.ContractNumber
+
+) R1
+group by DATEPART(week,R1.DateActivity), DATEPART(year,R1.DateActivity)
+
+) T1
+
+JOIN
+
+(
+
+SELECT 
+  DATEPART(YEAR, DATE) AS YR, 
+  DATEPART(wk, DATE) AS WK, 
+  1.0*count(*) AS [Total Submissions Schduled]
+  FROM [RDODS].[DDPM].[DDRDailySummaryAndCompliance]
+ WHERE  
+	((ScheduledToBeOnSiteFlag is Not Null)
+	and Date < GETDATE() 
+	And CalendarDayType = 1 
+	AND Date > '2019-06-11')
+	OR (WorkersOnSiteCount is Not Null and Date < GETDATE() AND Date > '2019-06-11')
+ GROUP BY DATEPART(wk, DATE), DATEPART(YEAR, DATE)
+
+ ) T2
+
+on (T1.WK = T2.WK) and (T1.YR=T2.YR)
+
+
+
+
+) R2
+
+on ((R1.WK >= R2.WK) and (R1.YR = R2.YR)) OR (R1.YR>R2.YR)
+GROUP BY R1.WK, R1.YR 
+
+) R2
+
+on (R1.WK=R2.WK) and (R1.YR = R2.YR)
+WHERE R1.YR > 1901
+order by R1.YR, R1.WK
+```
+
+## Timeliness
+
+```mySQL
+/*Queries to determine whether contractors submitted reports within 48 hours of peforming work
+
+structure:
+-case statements sum report instances when the report timestamp is less than two days away from the date that activities were performed
+-the above value is divided by the total number of reports that were submitted for that day
+-results were grouped by week
+
+SELECT 
+  DATEPART(YEAR, DateActivity) AS YR, 
+  DATEPART(wk, DateActivity) AS WK, 	   
+  1.0* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end) AS [Reports Sumbitted on Time],
+  1.0* count (*) AS [Total Reports Submitted],
+  LEFT(100* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end)/NULLIF(CAST(1.0* count (*) AS DECIMAL),0),5) AS On_Time_Percent_Weekly
+FROM [RDODS].[DDPM].[DDRMaster]
+WHERE ContractNumber != '11111' 
+  AND DateActivity != '1900-01-01'
+  AND DateCreated >= DateActivity
+  AND ContractNumber != 'CLARK'
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)  
+
+*/
+
+/*=========================================================================================================*/
+
+/*Cumulative Timeliness Query
+
+-Join the code used above to find weekly accuracy % to itself on the following conditions
+-the week/year of the value in the left table is greater or equal to that of the right table
+-this join allows us to sum total reports to date for each week, and divide the number of reports
+-that had no over-rides by the total number of reports. this is the cumulative timeliness to date
+
+
+
+SELECT T1.WK,
+	   T1.YR,
+	   LEFT(100*Sum(T2.[Reports Sumbitted on Time])/Sum(T2.[Total Reports Submitted]),5) AS Cumulative_Report_Timeliness
+
+FROM
+
+(
+
+SELECT 
+  DATEPART(YEAR, DateActivity) AS YR, 
+  DATEPART(wk, DateActivity) AS WK, 	   
+  1.0* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end) AS [Reports Sumbitted on Time],
+  1.0* count (*) AS [Total Reports Submitted],
+  LEFT(100* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end)/NULLIF(CAST(1.0* count (*) AS DECIMAL),0),5) AS On_Time_Percent_Weekly
+FROM [RDODS].[DDPM].[DDRMaster]
+WHERE ContractNumber != '11111' 
+  AND DateActivity != '1900-01-01'
+  AND DateCreated >= DateActivity
+  AND ContractNumber != 'CLARK'
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)  
+
+) T1
+
+JOIN
+
+(
+
+SELECT 
+  DATEPART(YEAR, DateActivity) AS YR, 
+  DATEPART(wk, DateActivity) AS WK, 	   
+  1.0* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end) AS [Reports Sumbitted on Time],
+  1.0* count (*) AS [Total Reports Submitted],
+  LEFT(100* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end)/NULLIF(CAST(1.0* count (*) AS DECIMAL),0),5) AS On_Time_Percent_Weekly
+FROM [RDODS].[DDPM].[DDRMaster]
+WHERE ContractNumber != '11111' 
+  AND DateActivity != '1900-01-01'
+  AND DateCreated >= DateActivity
+  AND ContractNumber != 'CLARK'
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)  
+
+) T2
+
+on ((T1.WK >= T2.WK) and (T1.YR = T2.YR)) OR (T1.YR>T2.YR)
+GROUP BY T1.WK, T1.Yr 
+order by T1.WK, T1.Yr
+
+
+*/
+
+/*==========================================================================================================*/
+
+/*
+Final query joins the above two queries into one table, so that weekly and cumulative values can be seen side-by-side, and so all values can be exported to Tableau and graphed more easily.
+*/
+Select R1.WK,R1.YR,R1.On_Time_Percent_Weekly,R2.Cumulative_Report_Timeliness FROM
+/*Combining queries above. Now will have weekly and cumulative averages in the same table*/
+(
+
+SELECT 
+  DATEPART(YEAR, DateActivity) AS YR, 
+  DATEPART(wk, DateActivity) AS WK, 	   
+  1.0* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end) AS [Reports Sumbitted on Time],
+  1.0* count (*) AS [Total Reports Submitted],
+  LEFT(100* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end)/NULLIF(CAST(1.0* count (*) AS DECIMAL),0),5) AS On_Time_Percent_Weekly
+FROM [RDODS].[DDPM].[DDRMaster]
+WHERE ContractNumber != '11111' 
+  AND DateActivity != '1900-01-01'
+  AND DateCreated >= DateActivity
+  AND ContractNumber != 'CLARK'
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)  
+
+) R1
+
+JOIN
+
+(
+
+SELECT T1.WK,
+	   T1.YR,
+	   LEFT(100*Sum(T2.[Reports Sumbitted on Time])/Sum(T2.[Total Reports Submitted]),5) AS Cumulative_Report_Timeliness
+
+FROM
+
+(
+
+SELECT 
+  DATEPART(YEAR, DateActivity) AS YR, 
+  DATEPART(wk, DateActivity) AS WK, 	   
+  1.0* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end) AS [Reports Sumbitted on Time],
+  1.0* count (*) AS [Total Reports Submitted],
+  LEFT(100* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end)/NULLIF(CAST(1.0* count (*) AS DECIMAL),0),5) AS On_Time_Percent_Weekly
+FROM [RDODS].[DDPM].[DDRMaster]
+WHERE ContractNumber != '11111' 
+  AND DateActivity != '1900-01-01'
+  AND DateCreated >= DateActivity
+  AND ContractNumber != 'CLARK'
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)  
+
+) T1
+
+JOIN
+
+(
+
+SELECT 
+  DATEPART(YEAR, DateActivity) AS YR, 
+  DATEPART(wk, DateActivity) AS WK, 	   
+  1.0* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end) AS [Reports Sumbitted on Time],
+  1.0* count (*) AS [Total Reports Submitted],
+  LEFT(100* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end)/NULLIF(CAST(1.0* count (*) AS DECIMAL),0),5) AS On_Time_Percent_Weekly
+FROM [RDODS].[DDPM].[DDRMaster]
+WHERE ContractNumber != '11111' 
+  AND DateActivity != '1900-01-01'
+  AND DateCreated >= DateActivity
+  AND ContractNumber != 'CLARK'
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)  
+
+) T2
+
+on ((T1.WK >= T2.WK) and (T1.YR = T2.YR)) OR (T1.YR>T2.YR)
+GROUP BY T1.WK, T1.Yr 
+
+) R2
+
+on (R1.WK=R2.WK) and (R1.YR = R2.YR)
+WHERE R1.YR > 1901
+order by R1.YR, R1.WK
+```
+
+## Timely Compliance
+
+```mySQL
+
+/*Query to find total  submissions thjat were on time and submitted by unique subs*/
+
+/* Compliance query copy - see Compliance Query original file for writeup
+
+SELECT T1.WK, T1.YR, T1. Total_Submissions_No_Duplicates, T2.[Total Submissions Schduled],LEFT(100* T1.Total_Submissions_No_Duplicates/CAST(T2.[Total Submissions Schduled] AS DECIMAL),5) AS Compliance_Percentage_Weekly
+FROM
+(
+SELECT DATEPART(week,R1.DateActivity) AS WK, DATEPART(year,R1.DateActivity) as YR, count(*) AS Total_Submissions_No_Duplicates
+FROM
+(
+
+SELECT R1.DateActivity, R1.ContractNumber, case when count(*)>=1 then 1 else 0 end AS Total_Submissions
+FROM [RDODS].[DDPM].[DDRMaster] R1
+group by R1.DateActivity, R1.ContractNumber
+
+) R1
+group by DATEPART(week,R1.DateActivity), DATEPART(year,R1.DateActivity)
+
+) T1
+
+JOIN
+
+(
+
+SELECT 
+  DATEPART(YEAR, DATE) AS YR, 
+  DATEPART(wk, DATE) AS WK, 
+  1.0*count(*) AS [Total Submissions Schduled]
+  FROM [RDODS].[DDPM].[DDRDailySummaryAndCompliance]
+ WHERE  
+	((ScheduledToBeOnSiteFlag is Not Null)
+	and Date < GETDATE() 
+	And CalendarDayType = 1 
+	AND Date > '2019-06-11')
+	OR (WorkersOnSiteCount is Not Null and Date < GETDATE() AND Date > '2019-06-11')
+ GROUP BY DATEPART(wk, DATE), DATEPART(YEAR, DATE)
+
+ ) T2
+
+on (T1.WK = T2.WK) and (T1.YR=T2.YR)
+order by T1.YR, T1.WK
+*/
+
+
+
+/*========================================================================================================================================================================================*/
+/*========================================================================================================================================================================================*/
+/*========================================================================================================================================================================================*/
+/*========================================================================================================================================================================================*/
+
+/*timeliness query copy - see original Timeliness query code for writeup
+SELECT 
+  DATEPART(YEAR, DateActivity) AS YR, 
+  DATEPART(wk, DateActivity) AS WK, 	   
+  1.0* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end) AS [Reports Sumbitted on Time],
+  1.0* count (*) AS [Total Reports Submitted],
+  LEFT(100* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end)/NULLIF(CAST(1.0* count (*) AS DECIMAL),0),5) AS On_Time_Percent_Weekly
+FROM [RDODS].[DDPM].[DDRMaster]
+WHERE ContractNumber != '11111' 
+  AND DateActivity > '2019-06-11'
+  AND DateCreated >= DateActivity
+  AND ContractNumber != 'CLARK'
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)  
+*/
+
+/*========================================================================================================================================================================================*/
+/*========================================================================================================================================================================================*/
+/*========================================================================================================================================================================================*/
+/*========================================================================================================================================================================================*/
+
+SELECT R1.WK, R1.YR,R2.[Reports Sumbitted on Time], R1.[Total Submissions Schduled],LEFT(100* R2.[Reports Sumbitted on Time]/CAST(R1.[Total Submissions Schduled] AS DECIMAL),5) As TImely_Compliance_Weekly
+
+FROM
+
+(SELECT T1.WK, T1.YR, T1. Total_Submissions_No_Duplicates, T2.[Total Submissions Schduled],LEFT(100* T1.Total_Submissions_No_Duplicates/CAST(T2.[Total Submissions Schduled] AS DECIMAL),5) AS Compliance_Percentage_Weekly
+FROM
+
+(SELECT DATEPART(week,R1.DateActivity) AS WK, DATEPART(year,R1.DateActivity) as YR, count(*) AS Total_Submissions_No_Duplicates
+FROM
+
+(SELECT R1.DateActivity, R1.ContractNumber, case when count(*)>=1 then 1 else 0 end AS Total_Submissions
+FROM [RDODS].[DDPM].[DDRMaster] R1
+group by R1.DateActivity, R1.ContractNumber) R1
+
+group by DATEPART(week,R1.DateActivity), DATEPART(year,R1.DateActivity)) T1
+
+JOIN
+
+(SELECT 
+  DATEPART(YEAR, DATE) AS YR, 
+  DATEPART(wk, DATE) AS WK, 
+  1.0*count(*) AS [Total Submissions Schduled]
+  FROM [RDODS].[DDPM].[DDRDailySummaryAndCompliance]
+ WHERE  
+	((ScheduledToBeOnSiteFlag is Not Null)
+	and Date < GETDATE() 
+	And CalendarDayType = 1 
+	AND Date > '2019-06-11')
+	OR (WorkersOnSiteCount is Not Null and Date < GETDATE() AND Date > '2019-06-11')
+ GROUP BY DATEPART(wk, DATE), DATEPART(YEAR, DATE)) T2
+
+on (T1.WK = T2.WK) and (T1.YR=T2.YR)) R1
+
+JOIN
+
+(SELECT 
+  DATEPART(YEAR, DateActivity) AS YR, 
+  DATEPART(wk, DateActivity) AS WK, 	   
+  1.0* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end) AS [Reports Sumbitted on Time],
+  1.0* count (*) AS [Total Reports Submitted],
+  LEFT(100* sum (case when DATEDIFF(day, ReportDate, CONVERT(date, DateCreated)) <= 2 then 1 else 0 end)/NULLIF(CAST(1.0* count (*) AS DECIMAL),0),5) AS On_Time_Percent_Weekly
+FROM [RDODS].[DDPM].[DDRMaster]
+WHERE ContractNumber != '11111' 
+  AND DateActivity > '2019-06-11'
+  AND DateCreated >= DateActivity
+  AND ContractNumber != 'CLARK'
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)) R2
+
+on (R1.WK = R2.WK) AND (R1.YR = R2.YR)
+order by R1.YR, R1.WK
+```
+
+## Validation
+
+```mySQL
+
+/*Query to determine how many reports Clark has approved (valiated)
+
+structure:
+-sum all instances where ClarkApproved values is not null as approved reports
+-sum all records with a recorded date to find total submitted reports
+-divide the above values to find the percentage of reports approved
+
+*/
+
+/*SELECT DATEPART(wk, DateActivity) AS WK, DATEPART(YEAR, DateActivity) AS YR, 
+	   sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Approved_Reports,
+	   sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Total_Submitted, 
+	   CASE when sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end)>0 then (sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end)/CAST(sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS DECIMAL)) Else Null end AS Weekly_Approved_Percent
+FROM [RDODS].[DDPM].[DDRMaster]
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)
+ORDER BY YR, WK   */
+
+
+
+/*======================================================================================================================================================== */
+
+
+/*Cumulative Validation Query
+Structure:
+-Join the code used above to find weekly accuracy % to itself on the following conditions
+-the week/year of the value in the left table is greater or equal to that of the right table
+-this join allows us to sum total reports to date for each week, and divide the number of reports
+-that had no over-rides by the total number of reports. this is the cumulative validation  to date
+*/
+/* SELECT T1.WK, T1.YR, LEFT(100*Sum(T2.Approved_Reports)/nullif(CAST(Sum(T2.Total_Submitted) AS DECIMAL),0),5) AS Cumulative_Approved_Percent
+
+FROM 
+
+(
+
+SELECT DATEPART(wk, DateActivity) AS WK, DATEPART(YEAR, DateActivity) AS YR, 
+	   sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Approved_Reports,
+	   sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Total_Submitted, 
+	   CASE when sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end)>0 then (sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end)/CAST(sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS DECIMAL)) Else Null end AS Weekly_Approved_Percent
+FROM [RDODS].[DDPM].[DDRMaster]
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)
+
+) T1
+
+JOIN
+
+(
+
+SELECT DATEPART(wk, DateActivity) AS WK, DATEPART(YEAR, DateActivity) AS YR, 
+	   sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Approved_Reports,
+	   sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Total_Submitted, 
+	   CASE when sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end)>0 then (sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end)/CAST(sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS DECIMAL)) Else Null end AS Weekly_Approved_Percent
+FROM [RDODS].[DDPM].[DDRMaster]
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)
+
+) T2
+
+ON ((T1.WK >= T2.WK) AND (T1.YR = T2.YR)) OR (T1.YR >T2.YR)
+GROUP BY T1.WK, T1.Yr 
+order by T1.WK, T1.Yr    */
+
+
+
+
+
+/*========================================================================================================================================= */
+
+/*Final query structure
+-above two queries are joined on week and year
+-this allows us to see weekly and cumulative stats side-by-side
+-also allows the team to export a single query to Tableau for further visualization
+
+*/
+
+Select R1.WK,R1.Yr,R1.Weekly_Approved_Percent,R2.Cumulative_Approved_Percent FROM
+/*Combining queries above. Now will have weekly and cumulative averages in the same table*/
+(
+
+SELECT DATEPART(wk, DateActivity) AS WK, DATEPART(YEAR, DateActivity) AS YR, 
+	   sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Approved_Reports,
+	   sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Total_Submitted, 
+	   100*CASE when sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end)>0 then (sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end)/CAST(sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS DECIMAL)) Else Null end AS Weekly_Approved_Percent
+FROM [RDODS].[DDPM].[DDRMaster]
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)
+
+) R1
+
+JOIN
+
+(
+
+SELECT T1.WK, T1.YR, LEFT(100*Sum(T2.Approved_Reports)/nullif(CAST(Sum(T2.Total_Submitted) AS DECIMAL),0),5) AS Cumulative_Approved_Percent
+
+FROM 
+
+(
+
+SELECT DATEPART(wk, DateActivity) AS WK, DATEPART(YEAR, DateActivity) AS YR, 
+	   sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Approved_Reports,
+	   sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Total_Submitted, 
+	   CASE when sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end)>0 then (sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end)/CAST(sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS DECIMAL)) Else Null end AS Weekly_Approved_Percent
+FROM [RDODS].[DDPM].[DDRMaster]
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)
+
+) T1
+
+JOIN
+
+(
+
+SELECT DATEPART(wk, DateActivity) AS WK, DATEPART(YEAR, DateActivity) AS YR, 
+	   sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Approved_Reports,
+	   sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Total_Submitted, 
+	   CASE when sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end)>0 then (sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end)/CAST(sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS DECIMAL)) Else Null end AS Weekly_Approved_Percent
+FROM [RDODS].[DDPM].[DDRMaster]
+GROUP BY DATEPART(wk, DateActivity), DATEPART(YEAR, DateActivity)
+
+) T2
+
+ON ((T1.WK >= T2.WK) AND (T1.YR = T2.YR)) OR (T1.YR >T2.YR)
+GROUP BY T1.WK, T1.Yr 
+
+) R2
+
+on (R1.WK=R2.WK) and (R1.Yr = R2.YR)
+WHERE R1.YR > 1901
+order by R1.YR, R1.WK
+
+
+
+
+
+
+/* ==============================================================================================================*/
+
+/*
+SELECT sum(case when ClarkApproved IS NOT Null AND  DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Approved_Reports,
+	sum(case when DATEPART(YEAR, DateActivity) > 1901 then 1 else 0 end) AS Total_Submitted
+FROM [RDODS].[DDPM].[DDRMaster]    */
+
+```
+
 # Conclusion
