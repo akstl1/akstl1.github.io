@@ -40,24 +40,15 @@ appear red. A cell appears white if no workers are needed that day.   -->
  
 
 1. Determine which subcontractors are scheduled to be on site, and why scheduled 
-contractors are not on site. This helps managers determine whether a project is on-time, 
-and create mitigation plans as needed to recover any lost time. 
+contractors are not on site.
  
-2. Contact subcontractors to inquire about insufficient manpower. Having a concise table of 
-manpower allows project managers to quickly determine whether any subcontractors 
-have critically low manpower that could slow down progress. 
+2. Contact subcontractors to inquire about insufficient manpower, so recovery plans can be put in place.
  
-3. Estimate total hours worked on the project for safety record reporting. Prior to the 
-creation of this table, managers could spend hours or days performing similar estimates 
-and paperwork for official, mandated records. 
+3. Estimate total hours worked on the project for safety record reporting, saving hours of monthly reporting work.
  
-4. Determine which daily reports are not approved, and ensure reports subsequently get 
-approved. Without approval, executive leadership can’t be sure of the report’s accuracy. 
+4. Determine which daily reports are not reviewed, confirm the accuracy of those reports, and approve them efficiently.
 
-
-
-
----
+<!-- ---
 
 To remedy this, our team developed a manpower reporting system with two key features to address the above issues:
 1. Provided subcontractors a user-friendly interface to input their manpower and select tasks each team was working on
@@ -72,9 +63,9 @@ After creating the above, the team wanted to create metrics to track progress an
 With this basic system in place, the team came up with several metrics to track 
 
 
----
+--- -->
 
-For the latter half of 2019 and January 2020, I co-managed an initiative to 
+<!-- For the latter half of 2019 and January 2020, I co-managed an initiative to 
 improve daily manpower reporting on construction sites. The focus of the team was to create an 
 app that allows subcontractors to: 
 
@@ -95,21 +86,21 @@ data, discuss inaccuracies with subcontractors, and approve the final report sub
 With this in place, I helped develop analytical tables for our project staff. The key table 
 displayed approval status and total manpower values. The table allows project managers to view manpower trends on a project for any date range at a 
 glance, a feature not available on previously used software. With these trends, project managers 
-can now more easily do the following:
+can now more easily do the following: -->
 
 <!-- Each column represents a date, and each row represents the manpower of a given 
 subcontractor per day. If a subcontractor submits a report, that day’s cell turns green for that 
 contractor. If a subcontractor is supposed to be working but did not submit a report their cell will 
 appear red. A cell appears white if no workers are needed that day.   -->
  
-1. Determine which subcontractors are scheduled to be on site, and why scheduled 
+<!-- 1. Determine which subcontractors are scheduled to be on site, and why scheduled 
 contractors are not on site.
  
 2. Contact subcontractors to inquire about insufficient manpower, so recovery plans can be put in place.
  
 3. Estimate total hours worked on the project for safety record reporting, saving hours of monthly reporting work.
  
-4. Determine which daily reports are not reviewed, confirm the accuracy of those reports, and approve them efficiently.
+4. Determine which daily reports are not reviewed, confirm the accuracy of those reports, and approve them efficiently. -->
 
 # Metric Selection
 
