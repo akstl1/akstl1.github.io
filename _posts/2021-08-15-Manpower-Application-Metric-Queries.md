@@ -110,9 +110,7 @@ leadership to determine whether the app was successful as a whole and monitor in
 project performance. I developed 5 metrics as part of this process. These metrics were as 
 follows: 
 
-1. Accuracy - measures whether subcontractors are submitting accurate reports, judged by 
-determining whether our personnel have edited any of the information submitted by 
-subs. This is critical because if our team has to edit many entries, then we are not saving as 
+1. Accuracy - measures whether subcontractors are submitting accurate reports; an 'accurate' report was deemed to be one that didn't require further editing/clarification after initial review. This is critical because if many entries required editing, then we are not saving as 
 much time as anticipated by using the new system.  
  
 2. Compliance - measures the number of subcontractors that are submitting reports, as a 
