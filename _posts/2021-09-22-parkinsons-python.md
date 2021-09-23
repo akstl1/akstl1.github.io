@@ -7,21 +7,6 @@ tags: [Python, Parkinson's, Classification]
 
 # Insert Intro Here
 
-I love Python & Coffee so much, here is that picture from the top of my project AGAIN, but this time, in the BODY of my project!
-
-<!-- ![alt text](/img/posts/coffee_python.jpg "Coffee & Python - I love them!") -->
-
-
-```
-my_love_for_python = 0
-my_python_knowledge = 0
-
-for day in lifetime:
-    my_love_for_python += 1
-    my_python_knowledge += 1
-```
-
-
 ---
 ## Discover
 
@@ -156,9 +141,16 @@ recall_score(y_test,y_pred_class)
 f1_score(y_test,y_pred_class)
 ```
 
+When running the above code, we get an f1 score of 0.9589.....
 
+1. KNN
+2. Random Forest
 
+## Model Development
 
+### KNN Model Analysis
+
+### Random Forest Classification Analysis
 
 
 
