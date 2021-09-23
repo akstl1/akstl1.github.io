@@ -82,52 +82,77 @@ y=data['status']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 ```
 
-
-
-
-
-
-
-<!-- Just so you really see how much I love Python, here is some code BUT with some colours for keywords & functionality!
+## Establish A Baseline
 
 ```python
-my_love_for_python = 0
-my_python_knowledge = 0
+scaler = MinMaxScaler()
 
-for day in lifetime:
-    my_love_for_python += 1
-    my_python_knowledge += 1  
+X_train_lr = pd.DataFrame(scaler.fit_transform(X_train),columns=X_train.columns) #return as df
+X_test_lr = pd.DataFrame(scaler.transform(X_test),columns=X_test.columns) #return as df
 ```
 
-Here is an **unordered list** showing some things I love about Python
+```python
+clf_lr = LogisticRegression(random_state=42,max_iter=1000)
 
-* For my work
-    * Data Analysis
-    * Data Visualisation
-    * Machine Learning
-* For fun
-    * Deep Learning
-    * Computer Vision
-    * Projects about coffee
+feature_selector = RFECV(clf_lr, cv=5)
 
-Here is an _ordered list_ showing some things I love about coffee
+fit=feature_selector.fit(X_train,y_train)
 
-1. The smell
-    1. Especially in the morning, but also at all times of the day!
-2. The taste
-3. The fact I can run the 100m in approx. 9 seconds after having 4 cups in quick succession
+optimal_feature_count = feature_selector.n_features_
+print(f'the optimal number of features is: {optimal_feature_count}')
 
-I love Python & Coffee so much, here is that picture from the top of my project AGAIN, but this time, in the BODY of my project!
+X_train_lr = X_train_lr.loc[:,feature_selector.get_support()]
+X_test_lr = X_test_lr.loc[:,feature_selector.get_support()]
 
-![alt text](/img/posts/coffee_python.jpg "Coffee & Python - I love them!")
+#understand how much better it is to have 2 vars than any other #
 
-The above image is just linked to the actual file in my Github, but I could also link to images online, using the URL!
+plt.plot(range(1,len(fit.grid_scores_)+1),fit.grid_scores_,marker='o')
+#range used so x axis goes from 1 to 4 features rather than starting at 0
+#second fit is the scores for each number of vars
+plt.ylabel("model score")
+plt.xlabel('number of features')
+plt.title(f'Feature Selection using RFE \n Optimal number of features is {optimal_feature_count} (at score of {round(max(fit.grid_scores_),3)})')
+plt.tight_layout()
+plt.show()
+```
 
-A line break, like this one below - helps me make sense of what I'm reading, especially when I've had so much coffee that my vision goes a little blurry
+```python
+clf=LogisticRegression(random_state=42,max_iter=1000)
+clf.fit(X_train_lr,y_train)
+```
 
----
 
-I could also add things to my project like links, tables, quotes, and HTML blocks - but I'm starting to get a cracking headache.  Must be coffee time.
- -->
+```python
+y_pred_class = clf.predict(X_test_lr)
+y_pred_proba = clf.predict_proba(X_test_lr)[:,1]
+
+
+confusion_matrix(y_test, y_pred_class)
+
+plot_confusion_matrix(clf,X_test_lr,y_test,cmap='coolwarm')
+
+#Accuracy ((# of correct classifactions out of all attempted classifications))
+
+accuracy_score(y_test,y_pred_class)
+
+# Precision (of all observations that were predicted +, how many were actually +)
+precision_score(y_test,y_pred_class)
+
+#Recall (of all + observations, how many did we predict as +)
+recall_score(y_test,y_pred_class)
+
+#f1 score (harmonic mean of recall and precision)
+f1_score(y_test,y_pred_class)
+```
+
+
+
+
+
+
+
+
+
+
 <!-- <iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=d678e41c-01d8-4402-8405-23b635476160&autoAuth=true&ctid=5ebbcbe0-fcd6-4376-b0ed-e060d29cb79e&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLW5vcnRoLWNlbnRyYWwtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D" frameborder="0" allowFullScreen="true"></iframe>
  -->
