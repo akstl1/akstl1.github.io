@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Parkinson's Detection
-image: "/posts/parkinsons_image.jpg"
+image: "/posts/Park2.jpg"
 tags: [Python, Parkinson's, Classification]
 ---
 
