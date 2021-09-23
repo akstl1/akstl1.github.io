@@ -7,6 +7,11 @@ tags: [Python, Parkinson's, Classification]
 
 # Insert Intro Here
 
+I love Python & Coffee so much, here is that picture from the top of my project AGAIN, but this time, in the BODY of my project!
+
+<!-- ![alt text](/img/posts/coffee_python.jpg "Coffee & Python - I love them!") -->
+
+
 ```
 my_love_for_python = 0
 my_python_knowledge = 0
@@ -115,7 +120,7 @@ plt.title(f'Feature Selection using RFE \n Optimal number of features is {optima
 plt.tight_layout()
 plt.show()
 ```
-<img src="/parkinsonsLR.png" >
+<img src="/img/parkinsonsLR.png" >
 ```python
 clf=LogisticRegression(random_state=42,max_iter=1000)
 clf.fit(X_train_lr,y_train)
