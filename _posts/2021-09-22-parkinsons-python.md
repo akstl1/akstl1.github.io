@@ -136,7 +136,12 @@ y_pred_proba = clf.predict_proba(X_test_lr)[:,1]
 confusion_matrix(y_test, y_pred_class)
 
 plot_confusion_matrix(clf,X_test_lr,y_test,cmap='coolwarm')
+```
 
+<img src="/img/parkinsonsLR_Confusion_matrix.png" >
+
+
+```python
 #Accuracy ((# of correct classifactions out of all attempted classifications))
 
 accuracy_score(y_test,y_pred_class)
