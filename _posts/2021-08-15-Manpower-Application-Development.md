@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Manpower Application Development
-image: "/posts/ddpm_cover_photo.png"
+image: "/posts/ddpm_cover_photo2.png"
 tags: [mySQL, KPI]
 ---
 # Summary
