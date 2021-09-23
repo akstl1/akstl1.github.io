@@ -82,7 +82,7 @@ y=data['status']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 ```
 
-## Establish A Baseline
+### Establish A Baseline
 
 ```python
 scaler = MinMaxScaler()
@@ -115,7 +115,7 @@ plt.title(f'Feature Selection using RFE \n Optimal number of features is {optima
 plt.tight_layout()
 plt.show()
 ```
-
+<img src="/parkinsonsLR.png" >
 ```python
 clf=LogisticRegression(random_state=42,max_iter=1000)
 clf.fit(X_train_lr,y_train)
