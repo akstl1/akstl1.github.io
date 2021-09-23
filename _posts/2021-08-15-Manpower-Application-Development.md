@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Manpower Application Metric Queries
+title: Manpower Application Development
 image: "/posts/Park2.jpg"
 tags: [mySQL, KPI]
 ---
@@ -16,19 +16,18 @@ Though manpower tracking is important, on many construction projects reporting i
 1. Subcontractors do not submit daily manpower logs and details to the general contractor
 2. The general contractor team does not have time to sort through all the paperwork
 
-To remedy the above issues, in tandem with a co-worker, I created the frameworks for the visuals and reporting features in a new reporting application.  
+To remedy the above issues, in tandem with a co-worker, I created the frameworks for the visuals and reporting features in a new reporting app.  
  
 I helped design a user-friendly interface that allowed end users to easily input data daily 
 into a database. This was a critical component of the application because without user support 
 and input, the app would not be used and there would be no data to analyze by my group.  
  
-Once a successful data entry system was created, I helped create a Report Approval 
-module to clean the subcontractor-input data. The module allowed staff to view submitted 
-data, edit as needed to ensure accuracy, and approve the final report submissions. Without this 
-feature, inaccurate data could be used in final analytics and skew manpower metrics. 
+Once a successful data entry system was created, I helped create and modify a Report Approval 
+module to review the subcontractor-input data. The module allowed staff to quickly view submitted 
+data, discuss inaccuracies with subcontractors, and approve the final report submissions.
 
-With this in place, I helped develop analytical tables for our project staff. The key table I 
-developed displayed approval status and summary manpower values. The table allows project managers to view manpower trends on a project for any date range at a 
+With this in place, I helped develop analytical tables for our project staff. The key table 
+displayed approval status and total manpower values. The table allows project managers to view manpower trends on a project for any date range at a 
 glance, a feature not available on previously used software. With these trends, project managers 
 can now more easily do the following:
 
@@ -37,7 +36,6 @@ shown below. Each column represents a date, and each row represents the manpower
 subcontractor per day. If a subcontractor submits a report, that day’s cell turns green for that 
 contractor. If a subcontractor is supposed to be working but did not submit a report their cell will 
 appear red. A cell appears white if no workers are needed that day.   -->
- 
 
 1. Determine which subcontractors are scheduled to be on site, and why scheduled 
 contractors are not on site.
