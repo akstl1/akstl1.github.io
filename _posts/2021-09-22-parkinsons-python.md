@@ -165,8 +165,6 @@ When running the above code, we get an f1 score of 0.9589.....
 
 ### KNN Model Analysis
 
-### Random Forest Classification Analysis
-
 ```python
 data.describe()
 ```
@@ -267,10 +265,81 @@ plt.show()
 ```
 
 
+### Random Forest Classification Analysis
+
+```python
+clf=RandomForestClassifier(random_state=42,n_estimators=500,max_features=5)
+clf.fit(X_train,y_train)
+```
+
+```python
+y_pred_class = clf.predict(X_test)
+y_pred_proba = clf.predict_proba(X_test)[:,1]
 
 
+confusion_matrix(y_test, y_pred_class)
+
+plot_confusion_matrix(clf,X_test,y_test,cmap='coolwarm')
+```
+
+INSERT CONFUSION MATRIX
 
 
+```python
+accuracy_score(y_test,y_pred_class)
+```
+
+```python
+precision_score(y_test,y_pred_class)
+```
+
+```python
+recall_score(y_test,y_pred_class)
+```
+
+```python
+f1_score(y_test,y_pred_class)
+```
+
+
+```python
+feature_importance=pd.DataFrame(clf.feature_importances_)
+feature_names=pd.DataFrame(X.columns)
+feature_importance_summary = pd.concat([feature_names,feature_importance],axis=1)
+feature_importance_summary.columns = ['input_variable','feature_importance']
+feature_importance_summary.sort_values(by='feature_importance', inplace=True)
+
+plt.barh(feature_importance_summary['input_variable'],feature_importance_summary['feature_importance'])
+plt.title("Feature Importance of Random Forests")
+plt.xlabel("Feature Importance")
+plt.tight_layout()
+plt.show()
+```
+insert plot 1
+
+```python
+result = permutation_importance(clf,X_test, y_test, n_repeats=10,random_state=42)
+print(result)
+
+
+permutation_importance=pd.DataFrame(result['importances_mean'])
+feature_names=pd.DataFrame(X.columns)
+permutation_importance_summary = pd.concat([feature_names,permutation_importance],axis=1)
+permutation_importance_summary.columns = ['input_variable','permutation_importance']
+permutation_importance_summary.sort_values(by='permutation_importance', inplace=True)
+```
+
+```python
+plt.barh(permutation_importance_summary['input_variable'],permutation_importance_summary['permutation_importance'])
+plt.title("Permutation Importance of Random Forests")
+plt.xlabel("Permutation Importance")
+plt.tight_layout()
+plt.show()
+```
+insert plot 2
+
+
+### Conclusions and Future Work
 
 
 
