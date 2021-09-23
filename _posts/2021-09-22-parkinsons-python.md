@@ -206,7 +206,7 @@ plt.title(f'Feature Selection using RFE \n Optimal number of features is {optima
 plt.tight_layout()
 plt.show()
 ```
-
+<img src="/img/KNN_Features">
 
 ```python
 clf=KNeighborsClassifier()
@@ -236,7 +236,7 @@ recall_score(y_test,y_pred_class)
 f1_score(y_test,y_pred_class)
 ```
 
-INSERT CONFUSION MATRIX HERE
+<img src="/img/KNN_F1">
 
 ```python
 k_list = list(range(2,25))
@@ -282,7 +282,7 @@ confusion_matrix(y_test, y_pred_class)
 plot_confusion_matrix(clf,X_test,y_test,cmap='coolwarm')
 ```
 
-INSERT CONFUSION MATRIX
+<img src="/img/RF_Confusion_Matrix">
 
 
 ```python
@@ -315,7 +315,7 @@ plt.xlabel("Feature Importance")
 plt.tight_layout()
 plt.show()
 ```
-insert plot 1
+<img src="/img/Feature_Importance1">
 
 ```python
 result = permutation_importance(clf,X_test, y_test, n_repeats=10,random_state=42)
@@ -336,7 +336,7 @@ plt.xlabel("Permutation Importance")
 plt.tight_layout()
 plt.show()
 ```
-insert plot 2
+<img src="/img/Permutation_Importance1">
 
 
 ### Conclusions and Future Work
