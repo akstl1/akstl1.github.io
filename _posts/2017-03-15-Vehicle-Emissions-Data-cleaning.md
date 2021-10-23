@@ -5,8 +5,8 @@ image: "/posts/vehicle_emissions.jpg"
 tags: [R, Data Cleaning]
 ---
 
-# Intro here
- 
+# Insert Intro Here
+
 ---
 
 # Air Quality Benefits of Emissions Testing Capstone: Data Cleaning
