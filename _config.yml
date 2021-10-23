@@ -24,6 +24,7 @@ avatar_image: /img/Head Shot.jpg
 # Contact links
 linkedln: "https://www.linkedin.com/in/allan-khariton/" # Add your linkedln handle
 github: "https://github.com/akstl1"  # Add your github handle
+construction: "https://akstl1.github.io/construction-portfolio"
 
 paginate: 6
 paginate_path: "/page/:num"
