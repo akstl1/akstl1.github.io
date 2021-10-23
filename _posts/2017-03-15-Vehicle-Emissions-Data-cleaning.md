@@ -2,10 +2,9 @@
 layout: post
 title: Air Quality Benefits of Emissions Testing: Data Cleaning
 image: "/posts/vehicle_emissions.jpg"
-tags: [Python, Parkinson's, Classification]
+tags: [R, Data Cleaning]
 ---
  ## Intro here
- 
 ---
 
 # Air Quality Benefits of Emissions Testing Capstone: Data Cleaning
