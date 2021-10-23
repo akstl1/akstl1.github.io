@@ -109,7 +109,7 @@ The original dataset had many columns irrelevant to emissions analysis; these we
 - V_DISP: Engine size (Liters)
 - V_DRIVE: Vehicle drive type, eg all wheel drive
 
-``r
+```r
 #loads the relevant dataset
 VTR2012 <- read.csv("C:/Users/VTR2012.txt")
 
@@ -118,6 +118,6 @@ original_count <- length(VTR2012$V_VIN)
 
 #narrows the VTR2012 dataset by only selecting relevant columns for analysis
 VTR2012 <- VTR2012[,c("V_VIN","V_DATE_TIME" ,"V_MAKE", "V_MODEL", "V_VEH_YEAR", "V_ODOMETER" , "V_CO", "V_HC", "V_NOX", "V_CO_STD", "V_HC_STD", "V_NOX_STD", "V_OBD_RES", "V_EM_RES", "V_RESULT" , "V_TRANS", "V_CYLINDERS", "V_DISP", "V_DRIVE" )]
-``
+```
 
 
