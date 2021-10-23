@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Air Quality Benefits of Emissions Testing: Data Cleaning
-image: "/posts/vehicle_emissions.jpg"
-tags: [R, Data Cleaning]
+title: Parkinson's Detection
+image: "/posts/Park2.jpg"
+tags: [Python, Parkinson's, Classification]
 ---
 
 # Intro here
