@@ -1,347 +1,200 @@
 ---
 layout: post
 title: Heart Disease Classification
-image: "/posts/Park2.jpg"
-tags: [Python, Classification]
+image: "/posts/heart_disease_1.jpg"
+tags: [Python, Classification, Random Forest, KNN, Logistic Classification]
 ---
 
-# Insert Intro Here
+# Part 1 - INTRODUCTION
+Heart disease describes a variety of related conditions such as Coronary Artery Disease, Acute coronary syndrome, Angina, and Aortic Anuerism. Heart disease can lead to numerous detrimental or fatal conditions such as diabetes, heart failure, and heart attack.
 
----
-## Discover
+It is the leading cause of death in the Unites States, according to the CDC. Roughly 660,000 - 700,00 people in the US die each year from heart disease, which is about one-quarter of all yearly deaths. Approximately 18 million people wordwide die due to heart disease annually, which is about 32% of all deaths.
 
-### Load Relevant Libraries for the project
+Given the disease's prevelence and series symptoms, doctors are collecting data from patients to assess a patient's risk for heart disease and prevent it if possible. In this analysis, I will use a set of patient data and use it to predict a patient's risk for having heart disease.
 
+To do this, I will clean data and then utilize different machine learning models to predict a patient's risk of having heart disease. I will then take the most successful model and deploy it so others could, in theory, use it to predict this risk in real time.
+
+## ---- Results ----
+After running several different models on the data, I determined that a random forest model was best able to predict heart disease risk with an accuracy of 96.6% and F1 score of 96.8%. With this finding, I then deployed the model to Heroku so others could (theoretically) use it for prediction purposes.
+
+## ---- Data Source and Notes ----
+Data source: https://www.kaggle.com/johnsmith88/heart-disease-dataset/version/2
+
+Data column dictionary:
+
+1. age
+2. sex
+3. chest pain type (4 values)
+4. resting blood pressure
+5. serum cholestoral in mg/dl
+6. fasting blood sugar > 120 mg/dl
+7. resting electrocardiographic results (values 0,1,2)
+8. maximum heart rate achieved
+9. exercise induced angina
+10. oldpeak = ST depression induced by exercise relative to rest
+11. the slope of the peak exercise ST segment
+12. number of major vessels (0-3) colored by flourosopy
+13. thal: 0 = normal; 1 = fixed defect; 2 = reversable defect
+
+## ---- Import Libraries for Project ----
 ```python
+#analysis and viz imports
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.ensemble import RandomForestClassifier
+import seaborn as sns
+
+#data preparation imports
 from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.feature_selection import RFECV
+from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
+
+#ML model imports
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+
+#metric and analysis imports
 from sklearn.metrics import confusion_matrix,plot_confusion_matrix,accuracy_score,precision_score,recall_score,f1_score
-from sklearn.preprocessing import OneHotEncoder,MinMaxScaler
 from sklearn.inspection import permutation_importance
 
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.feature_selection import RFECV
-
-from sklearn.linear_model import LogisticRegression
-
+#deployment imports
+import joblib
 ```
 
-### Load Data
-
-First, the Parkinson's dataset is loaded. This data was gathered from Kaggle (https://www.kaggle.com/nidaguler/parkinsons-data-set).
+# Part 2 - Data Preparation And Exploration
+## ---- Load Data ----
 
 ```python
-data = pd.read_csv('../input/parkinsons-data-set/parkinsons.data')
+heart_disease_data = pd.read_csv("./heart.csv")
 
+#use the head method to get a glimpse of the data structure before moving forward
+heart_disease_data.head()
 ```
 
-### Prepare Data
+|age|	sex|	cp|	trestbps|	chol|	fbs|	restecg|	thalach|	exang|	oldpeak|	slope|	ca|	thal|	target|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|527|	62|	0|	0|	124|	209|	0|	1|	163|	0|	0.0|	2|	0|	2|	1|
+|359|	53|	0|	2|	128|	216|	0|	0|	115|	0|	0.0|	2|	0|	0|	1|
+|447|	55|	1|	0|	160|	289|	0|	0|	145|	1|	0.8|	1|	1|	3|	0|
+|31|	50|	0|	1|	120|	244|	0|	1|	162|	0|	1.1|	2|	0|	2|	1|
+|621|	48|	1|	0|	130|	256|	1|	0|	150|	1|	0.0|	2|	2|	3|	0|
 
-The dataset used for this project, provided by Max Little of Oxford, was cleaned/formatted prior to it being posted on Kaggle for public use. Luckily, that means all we have to do is drop the 'name' column since it only contains unique identifiers/keys. This is done in the next section.
-
-### Perform EDA
-
-First, we can drop the 'name' column as mentioned above. 
-```python
-data.drop('name',axis=1,inplace=True)
-```
-
-Next, we can get the head of the data to see the general data formatting and structure 
-```python
-data.head()
-```
-From the head call, we see that there are 24 columns and each of them is numeric. Glancing quickly at the columns we can see the columns are not all on the same scale, so some scaling will need to take place before analysis can occur.
-
-We can also look to see if there are any null values in our data.
+## ---- Clean Data ----
+First, I will check whether there are any missing values in any of the data rows.
 
 ```python
-data.info()
-
+heart_disease_data.info()
 ```
 
-The info call shows that each column has 195 non-null values, so there is no need to analyze further for rows with incomplete data.
+|# |  Column|    Non-Null| Count|  Dtype|
+|---|---|---|---|---|
+ |0|   age||       1025 non-null|   int64|  
+ |1|   sex |      1025 non-null|   int64 | 
+ |2|   cp  |      1025 non-null|   int64 | 
+ |3|   trestbps|  1025 non-null|   int64 | 
+ |4|   chol|      1025 non-null|   int64 | 
+ |5|   fbs|       1025 non-null|   int64 | 
+ |6|   restecg|   1025 non-null|   int64 | 
+ |7|   thalach|   1025 non-null|   int64 | 
+ |8|   exang |    1025 non-null|   int64 | 
+ |9|   oldpeak |  1025 non-null|   float64|
+ |10|  slope |    1025 non-null|   int64 | 
+ |11|  ca   |     1025 non-null|   int64 | 
+ |12|  thal   |   1025 non-null|   int64 | 
+ |13|  target |   1025 non-null|   int64 | 
 
-Before splitting the data for analysis, we want to make sure the data is shuffled. If the data was ordered in a particular way to start, shuffling will help ensure that the train/test data sets are more likely to be representative of the whole data set.
-```python
-data = shuffle(data,random_state=42)
-```
+The above table shows that there are no null values in the dataset, so nulls do not have to be removed/infilled.
 
-As noted by the original authors, many of the people tested had Parkinson's disease. We want to make sure that our data isn't too imbalanced, or else further data preparation may be needed to account for such imbalance. We do this by determining the percent of recordings that had a positive status for Parkinson's Disease.
-
-```python
-data['status'].value_counts(normalize=True) 
-```
-
-Running the above code, we find that 75% of rows have a positive status. Though this indicates that there are more positive instances, there should be enough instances of both positive and negative results to continue with the analysis without further preparation.
-
-### Split Data for Analysis
-
-```python
-X=data.drop('status',axis=1)
-y=data['status']
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-```
-
-### Establish A Baseline
+Next I will view the description of the dataset. In the data description, the data uploader indicates that certain variables are boolean, some range for 0-3, and others like age have some common limits like age not being negative. I will use this data and check data ranges to make sure data is within proper bounds.
 
 ```python
-scaler = MinMaxScaler()
-
-X_train_lr = pd.DataFrame(scaler.fit_transform(X_train),columns=X_train.columns) #return as df
-X_test_lr = pd.DataFrame(scaler.transform(X_test),columns=X_test.columns) #return as df
+heart_disease_data.describe()
 ```
+| |age|	sex|	cp|	trestbps|	chol|	fbs|	restecg|	thalach|	exang|	oldpeak|	slope|	ca|	thal|	target|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|mean|	54.434146|	0.695610|	0.942439|	131.611707|	246.00000|	0.149268|	0.529756|	149.114146|	0.336585|	1.071512|	1.385366|	0.754146|	2.323902|	0.513171|
+|std|	9.072290|	0.460373|	1.029641|	17.516718|	51.59251|	0.356527|	0.527878|	23.005724|	0.472772|	1.175053|	0.617755|	1.030798|	0.620660|	0.500070|
+|min|	29.000000|	0.000000|	0.000000|	94.000000|	126.00000|	0.000000|	0.000000|	71.000000|	0.000000|	0.000000|	0.000000|	0.000000|	0.000000|	0.000000|
+|25%|	48.000000|	0.000000|	0.000000|	120.000000|	211.00000|	0.000000|	0.000000|	132.000000|	0.000000|	0.000000|	1.000000|	0.000000|	2.000000|	0.000000|
+|50%|	56.000000|	1.000000|	1.000000|	130.000000|	240.00000|	0.000000|	1.000000|	152.000000|	0.000000|	0.800000|	1.000000|	0.000000|	2.000000|	1.000000|
+|75%|	61.000000|	1.000000|	2.000000|	140.000000|	275.00000|	0.000000|	1.000000|	166.000000|	1.000000|	1.800000|	2.000000|	1.000000|	3.000000|	1.000000|
+|max|	77.000000|	1.000000|	3.000000|	200.000000|	564.00000|	1.000000|	2.000000|	202.000000|	1.000000|	6.200000|	2.000000|	4.000000|	3.000000|	1.000000|
 
 ```python
-clf_lr = LogisticRegression(random_state=42,max_iter=1000)
+heart_disease_data["cp"].unique()
+#array([0, 2, 1, 3], dtype=int64)
 
-feature_selector = RFECV(clf_lr, cv=5)
+heart_disease_data["fbs"].unique()
+#array([0, 1], dtype=int64)
 
-fit=feature_selector.fit(X_train,y_train)
+heart_disease_data["restecg"].unique()
+#array([1, 0, 2], dtype=int64)
 
-optimal_feature_count = feature_selector.n_features_
-print(f'the optimal number of features is: {optimal_feature_count}')
+heart_disease_data["exang"].unique()
+#array([0, 1], dtype=int64)
 
-X_train_lr = X_train_lr.loc[:,feature_selector.get_support()]
-X_test_lr = X_test_lr.loc[:,feature_selector.get_support()]
+heart_disease_data["slope"].unique()
+#array([2, 1, 0], dtype=int64)
 
-#understand how much better it is to have 2 vars than any other #
+heart_disease_data["ca"].unique()
+#array([0, 1, 2, 4, 3], dtype=int64)
 
-plt.plot(range(1,len(fit.grid_scores_)+1),fit.grid_scores_,marker='o')
-#range used so x axis goes from 1 to 4 features rather than starting at 0
-#second fit is the scores for each number of vars
-plt.ylabel("model score")
-plt.xlabel('number of features')
-plt.title(f'Feature Selection using RFE \n Optimal number of features is {optimal_feature_count} (at score of {round(max(fit.grid_scores_),3)})')
-plt.tight_layout()
-plt.show()
+heart_disease_data["thal"].unique()
+#array([2, 0, 3, 1], dtype=int64)
+
+heart_disease_data["target"].unique()
+#array([1, 0], dtype=int64)
 ```
-<img src="/img/parkinsonsLR.png" >
+Looking at the data, all columns have data within reasonable limits and no corrections need to be made.
+
+Next I will shuffle the data, according to the target variable, to help randomize distribution into train and test data sets.
 
 ```python
-clf=LogisticRegression(random_state=42,max_iter=1000)
-clf.fit(X_train_lr,y_train)
-```
+#shuffle data, to ensure that target variable rows are randomly dispersed. This may help when splitting into 
+#test and train sets
 
+heart_disease_data = shuffle(heart_disease_data,random_state=42)
+```
+I will also check the distribution of the target variable in the data. If data is imbalanced, we may need to take additional steps in our analysis to account for this.
 
 ```python
-y_pred_class = clf.predict(X_test_lr)
-y_pred_proba = clf.predict_proba(X_test_lr)[:,1]
+#Check the distribution of the target variable in this data. If the target is imbalanced, additional steps may 
+#need to be taken accordingly
 
+heart_disease_data['target'].value_counts(normalize=True)
 
-confusion_matrix(y_test, y_pred_class)
-
-plot_confusion_matrix(clf,X_test_lr,y_test,cmap='coolwarm')
+#1    0.513171
+#0    0.486829
 ```
 
-<img src="/img/parkinsonsLR_Confusion_matrix.png" >
+According to the above calculation, the target variable distribution in this data is roughly a 50/50 split between the 0 and 1 value. Since there isn't a clear imbalance, we can proceed without additional measures.
 
+## ---- Explore the data (EDA) ----
+In this classification task, I want to search for correlations between variables and especially with the target variable. To do so I will use a heatmap and correlation matrix.
 
 ```python
-#Accuracy ((# of correct classifactions out of all attempted classifications))
-
-accuracy_score(y_test,y_pred_class)
-
-# Precision (of all observations that were predicted +, how many were actually +)
-precision_score(y_test,y_pred_class)
-
-#Recall (of all + observations, how many did we predict as +)
-recall_score(y_test,y_pred_class)
-
-#f1 score (harmonic mean of recall and precision)
-f1_score(y_test,y_pred_class)
+sns.heatmap(heart_disease_data.corr());
 ```
+<a href="./img/posts/heart_disease_2.png"></a>
 
-When running the above code, we get an f1 score of 0.9589.....
+In the correlation matrix / heat map, I see that there may be correlations bewteen the target variable and the age, sex, exang, oldpeak, ca and thal variables. At this point I cannot discount any variables yet, but it is helpful to keep these in mind going forward.
 
-1. KNN
-2. Random Forest
+## ---- Hypothesize a Solution ----
+In the next parts of this analysis, I will attempt to classify the given data points and predict whether a given patient has heart disease. To do so, I will test three models:
 
-## Model Development
+1. Random Forest Classifier
+2. KNN Classifier
+3. Logistic Regression Classifier
 
-### KNN Model Analysis
+# Part 3 Develop a Model
+## ---- Split Data For Models ----
 
 ```python
-data.describe()
+X=heart_disease_data.drop('target',axis=1)
+y=heart_disease_data['target']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42,stratify=y)
 ```
-
-No categorical vars to encode!
-
-```python
-scaler = MinMaxScaler()
-
-X_train_knn = pd.DataFrame(scaler.fit_transform(X_train),columns=X_train.columns) #return as df
-X_test_knn = pd.DataFrame(scaler.transform(X_test),columns=X_test.columns) #return as df
-```
-
-
-```python
-from sklearn.ensemble import RandomForestClassifier
-
-
-clf = RandomForestClassifier(random_state=42)
-
-feature_selector = RFECV(clf, cv=5)
-
-fit=feature_selector.fit(X_train_knn,y_train)
-
-optimal_feature_count = feature_selector.n_features_
-print(f'the optimal number of features is: {optimal_feature_count}')
-
-X_train_knn = X_train_knn.loc[:,feature_selector.get_support()]
-X_test_knn = X_test_knn.loc[:,feature_selector.get_support()]
-
-#understand how much better it is to have 2 vars than any other #
-
-plt.plot(range(1,len(fit.grid_scores_)+1),fit.grid_scores_,marker='o')
-#range used so x axis goes from 1 to 4 features rather than starting at 0
-#second fit is the scores for each number of vars
-plt.ylabel("model score")
-plt.xlabel('number of features')
-plt.title(f'Feature Selection using RFE \n Optimal number of features is {optimal_feature_count} (at score of {round(max(fit.grid_scores_),3)})')
-plt.tight_layout()
-plt.show()
-```
-<img src="/img/KNN_Features.png">
-
-```python
-clf=KNeighborsClassifier()
-clf.fit(X_train_knn,y_train)
-```
-
-```python
-y_pred_class = clf.predict(X_test_knn)
-y_pred_proba = clf.predict_proba(X_test_knn)[:,1]
-
-
-confusion_matrix(y_test, y_pred_class)
-
-plot_confusion_matrix(clf,X_test_knn,y_test,cmap='coolwarm')
-
-#Accuracy ((# of correct classifactions out of all attempted classifications))
-
-accuracy_score(y_test,y_pred_class)
-
-# Precision (of all observations that were predicted +, how many were actually +)
-precision_score(y_test,y_pred_class)
-
-#Recall (of all + observations, how many did we predict as +)
-recall_score(y_test,y_pred_class)
-
-#f1 score (harmonic mean of recall and precision)
-f1_score(y_test,y_pred_class)
-```
-
-<img src="/img/KNN_F1.png">
-
-```python
-k_list = list(range(2,25))
-
-accuracy_scores= []
-for k in k_list:
-    clf= KNeighborsClassifier(n_neighbors=k)
-    clf.fit(X_train_knn,y_train)
-    y_pred=clf.predict(X_test_knn)
-    accuracy = f1_score(y_test,y_pred)
-    accuracy_scores.append(accuracy)
-
-max_accuracy = max(accuracy_scores)
-max_accuracy_idx = accuracy_scores.index(max_accuracy)
-optimal_k_value = k_list[max_accuracy_idx]
-
-#plot of max depths
-
-plt.plot(k_list,accuracy_scores)
-plt.scatter(optimal_k_value,max_accuracy,marker='x',color='red')
-plt.title(f"Accuracy (F1 Score) by K \n Optimal Value for K: {optimal_k_value} (Accuracy: {round(max_accuracy,4)})")
-plt.xlabel('k')
-plt.ylabel('accuracy (F1 Score)')
-plt.tight_layout()
-plt.show()
-```
-
-
-### Random Forest Classification Analysis
-
-```python
-clf=RandomForestClassifier(random_state=42,n_estimators=500,max_features=5)
-clf.fit(X_train,y_train)
-```
-
-```python
-y_pred_class = clf.predict(X_test)
-y_pred_proba = clf.predict_proba(X_test)[:,1]
-
-
-confusion_matrix(y_test, y_pred_class)
-
-plot_confusion_matrix(clf,X_test,y_test,cmap='coolwarm')
-```
-
-<img src="/img/RF_Confusion_Matrix.png">
-
-
-```python
-accuracy_score(y_test,y_pred_class)
-```
-
-```python
-precision_score(y_test,y_pred_class)
-```
-
-```python
-recall_score(y_test,y_pred_class)
-```
-
-```python
-f1_score(y_test,y_pred_class)
-```
-
-
-```python
-feature_importance=pd.DataFrame(clf.feature_importances_)
-feature_names=pd.DataFrame(X.columns)
-feature_importance_summary = pd.concat([feature_names,feature_importance],axis=1)
-feature_importance_summary.columns = ['input_variable','feature_importance']
-feature_importance_summary.sort_values(by='feature_importance', inplace=True)
-
-plt.barh(feature_importance_summary['input_variable'],feature_importance_summary['feature_importance'])
-plt.title("Feature Importance of Random Forests")
-plt.xlabel("Feature Importance")
-plt.tight_layout()
-plt.show()
-```
-<img src="/img/Feature_Importance1.png">
-
-```python
-result = permutation_importance(clf,X_test, y_test, n_repeats=10,random_state=42)
-print(result)
-
-
-permutation_importance=pd.DataFrame(result['importances_mean'])
-feature_names=pd.DataFrame(X.columns)
-permutation_importance_summary = pd.concat([feature_names,permutation_importance],axis=1)
-permutation_importance_summary.columns = ['input_variable','permutation_importance']
-permutation_importance_summary.sort_values(by='permutation_importance', inplace=True)
-```
-
-```python
-plt.barh(permutation_importance_summary['input_variable'],permutation_importance_summary['permutation_importance'])
-plt.title("Permutation Importance of Random Forests")
-plt.xlabel("Permutation Importance")
-plt.tight_layout()
-plt.show()
-```
-<img src="/img/Permutation_Importance1.png">
-
-
-### Conclusions and Future Work
-
-
-
-<!-- <iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=d678e41c-01d8-4402-8405-23b635476160&autoAuth=true&ctid=5ebbcbe0-fcd6-4376-b0ed-e060d29cb79e&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLW5vcnRoLWNlbnRyYWwtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D" frameborder="0" allowFullScreen="true"></iframe>
- -->
