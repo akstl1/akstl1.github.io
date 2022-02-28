@@ -17,6 +17,8 @@ To do this, I will clean data and then utilize different machine learning models
 ## ---- Results ----
 After running several different models on the data, I determined that a random forest model was best able to predict heart disease risk with an accuracy of 96.6% and F1 score of 96.8%. With this finding, I then deployed the model to Heroku so others could (theoretically) use it for prediction purposes.
 
+Note this project can also be viewed at the Github repository here: <a href="<a href="https://github.com/akstl1/heart-disease-prediction-deployment">Project Repo Link</a>">Project Repo Link</a>
+
 ## ---- Data Source and Notes ----
 Data source: https://www.kaggle.com/johnsmith88/heart-disease-dataset/version/2
 
@@ -520,7 +522,12 @@ The deployed random forest model can be found and used at the following site:
 
 The above site was developed using Flask, and the associated files are found at the github repository below:
 
-<a href="https://github.com/akstl1/heart-disease-prediction-deployment">Github Repo Link</a>
+<a href="https://github.com/akstl1/heart-disease-prediction-deployment">Deployment Repo Link</a>
+
+The work associated with this project can also be found at the github repository below:
+
+<a href="<a href="https://github.com/akstl1/heart-disease-prediction-deployment">Project Repo Link</a>">Project Repo Link</a>
+
 
 # Part 5 - POTENTIAL FUTURE WORK
 
