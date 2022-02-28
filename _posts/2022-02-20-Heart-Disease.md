@@ -251,11 +251,11 @@ random_forest_clf = RandomForestClassifier(random_state=42,n_estimators=500)
 run_model(X_test,X_train, y_test,y_train, random_forest_clf)
 ```
 
-Model: RandomForestClassifier(n_estimators=500, random_state=42) 
-accuracy: 0.9658536585365853 
-precision: 0.9375 
-recall: 1.0 
-F1 score: 0.967741935483871
+Model: RandomForestClassifier(n_estimators=500, random_state=42) <br>
+accuracy: 0.9658536585365853 <br>
+precision: 0.9375 <br>
+recall: 1.0 <br>
+F1 score: 0.967741935483871<br>
 
 <a href="./img/posts/heart_disease_3.png"></a>
 
@@ -303,11 +303,11 @@ X_test_knn = pd.DataFrame(scaler.transform(X_test),columns=X_test.columns) #retu
 run_model(X_test_knn,X_train_knn, y_test,y_train, knn_clf)
 ```
 
-Model: KNeighborsClassifier(n_neighbors=2) 
-accuracy: 0.9609756097560975 
-precision: 0.9619047619047619 
-recall: 0.9619047619047619 
-F1 score: 0.9619047619047619
+Model: KNeighborsClassifier(n_neighbors=2) <br>
+accuracy: 0.9609756097560975 <br>
+precision: 0.9619047619047619 <br>
+recall: 0.9619047619047619 <br>
+F1 score: 0.9619047619047619<br>
 
 <a href="./img/posts/heart_disease_5.png"></a>
 
@@ -473,11 +473,11 @@ nl = '\n'
 print(print(f'Logistic Model: {nl}accuracy: {accuracy} {nl}precision: {precision} {nl}recall: {recall} {nl}F1 score: {f1}'))
 ```
 
-Logistic Model: 
-accuracy: 0.848780487804878 
-precision: 0.8135593220338984 
-recall: 0.9142857142857143 
-F1 score: 0.860986547085202
+Logistic Model: <br>
+accuracy: 0.848780487804878 <br>
+precision: 0.8135593220338984 <br>
+recall: 0.9142857142857143 <br>
+F1 score: 0.860986547085202<br>
 
 <a href="./img/posts/heart_disease_9.png"></a>
 
