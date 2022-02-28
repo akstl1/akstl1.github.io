@@ -113,7 +113,8 @@ Next I will view the description of the dataset. In the data description, the da
 ```python
 heart_disease_data.describe()
 ```
-|. |age|	sex|	cp|	trestbps|	chol|	fbs|	restecg|	thalach|	exang|	oldpeak|	slope|	ca|	thal|	target|
+
+|Statistic |age|	sex|	cp|	trestbps|	chol|	fbs|	restecg|	thalach|	exang|	oldpeak|	slope|	ca|	thal|	target|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |mean|	54.434|	0.696|	0.942439|	131.612|	246|	0.149|	0.529|	149.114|	0.337|	1.071|	1.385|	0.754|	2.323|	0.513|
 |std|	9.072|	0.460|	1.029|	17.516|	51.59|	0.356|	0.527|	23.005|	0.472|	1.175|	0.617|	1.030|	0.620|	0.500|
