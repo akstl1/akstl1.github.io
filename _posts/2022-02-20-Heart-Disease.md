@@ -2,7 +2,7 @@
 layout: post
 title: Heart Disease Classification
 image: "/posts/Park2.jpg"
-tags: [Python, Parkinson's, Classification]
+tags: [Python, Classification]
 ---
 
 # Insert Intro Here
