@@ -516,11 +516,11 @@ joblib.dump(random_forest_clf, "heart_disease_model.joblib")
 
 The deployed random forest model can be found and used at the following site:
 
-https://heart-disease-prediction-ak.herokuapp.com/
+<a href="https://heart-disease-prediction-ak.herokuapp.com/">Heart Disease Prediction Website</a>
 
 The above site was developed using Flask, and the associated files are found at the github repository below:
 
-https://github.com/akstl1/heart-disease-prediction-deployment
+<a href="https://github.com/akstl1/heart-disease-prediction-deployment">Github Repo Link</a>
 
 # Part 5 - POTENTIAL FUTURE WORK
 
