@@ -178,7 +178,7 @@ In this classification task, I want to search for correlations between variables
 ```python
 sns.heatmap(heart_disease_data.corr());
 ```
-<a href="./img/posts/heart_disease_2.png"></a>
+<img src="/img/posts/heart_disease_2.png">
 
 In the correlation matrix / heat map, I see that there may be correlations bewteen the target variable and the age, sex, exang, oldpeak, ca and thal variables. At this point I cannot discount any variables yet, but it is helpful to keep these in mind going forward.
 
@@ -257,7 +257,7 @@ precision: 0.9375 <br>
 recall: 1.0 <br>
 F1 score: 0.967741935483871<br>
 
-<a href="./img/posts/heart_disease_3.png"></a>
+<img src="/img/posts/heart_disease_3.png">
 
 In addition to the above metrics, I would also like to know which features appear to be most important in the random forest when classifying this data. To determine this, I will find the permutation importance of each feature and plot it for easier analysis.
 
@@ -280,7 +280,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<a href="./img/posts/heart_disease_4.png"></a>
+<img src="/img/posts/heart_disease_4.png">
 
 As shown above, it appears that max heart rate achieved (thalach) is the most important factor in this model, followed by cholestorol level, resting blood pressure and age.
 
@@ -309,7 +309,7 @@ precision: 0.9619047619047619 <br>
 recall: 0.9619047619047619 <br>
 F1 score: 0.9619047619047619<br>
 
-<a href="./img/posts/heart_disease_5.png"></a>
+<img src="/img/posts/heart_disease_5.png">
 
 While conducting my KNN analysis, I want to make sure that the model I use is using an optimal number of neighbors in its calculations. To do so, I will runn the KNN model on a range of n_neighbors values and use the one with the best resulting F1 score.
 
@@ -345,7 +345,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<a href="./img/posts/heart_disease_6.png"></a>
+<img src="/img/posts/heart_disease_6.png">
 
 ## ---- Logistic Model ----
 
@@ -388,7 +388,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<a href="./img/posts/heart_disease_7.png"></a>
+<img src="/img/posts/heart_disease_7.png">
 
 Now that the optimal number of features is determined, I will also find the optimal probability threshold to use. To do this I will run the model on different threshold values from 0-1, calculate precision/recall/F1 scores for the model at these threshold values, and then utilize the threshold that yields the highest F1 score. This is done and results plotted below.
 
@@ -437,7 +437,7 @@ plt.legend(loc='lower left')
 plt.tight_layout()
 ```
 
-<a href="./img/posts/heart_disease_8.png"></a>
+<img src="/img/posts/heart_disease_8.png">
 
 ```python
 # optimal threshold is 0.44
@@ -479,7 +479,7 @@ precision: 0.8135593220338984 <br>
 recall: 0.9142857142857143 <br>
 F1 score: 0.860986547085202<br>
 
-<a href="./img/posts/heart_disease_9.png"></a>
+<img src="/img/posts/heart_disease_9.png">
 
 ## ---- Select best model ----
 Based on the above analysis, our models yielded the below performane:
