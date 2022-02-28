@@ -526,7 +526,7 @@ The above site was developed using Flask, and the associated files are found at 
 
 The work associated with this project can also be found at the github repository below:
 
-<a href="<a href="https://github.com/akstl1/heart-disease-prediction-deployment">Project Repo Link</a>">Project Repo Link</a>
+<a href="https://github.com/akstl1/heart-disease-prediction-deployment">Project Repo Link</a>
 
 
 # Part 5 - POTENTIAL FUTURE WORK
