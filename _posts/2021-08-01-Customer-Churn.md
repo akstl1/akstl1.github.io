@@ -432,8 +432,8 @@ print(classification_report(y_test,preds))
 |   .  |precision|    recall|  f1-score|   support|
 |---|---|---|---|---|
 | No|       0.82|      0.91|      0.87|      1549|
-         |Yes|       0.66|      0.46|      0.54|       561|
-| accuracy|      ...      |   ...      |     | 0.79|      2110|
+|Yes|       0.66|      0.46|      0.54|       561|
+| accuracy|...|...|     | 0.79|      2110|
 |macro avg|      | 0.74 |     0.69 |     0.70 |     2110|
 |weighted avg  |     0.78   |   0.79    |  0.78  |    2110|
 
@@ -480,14 +480,12 @@ IMAGE
 print(classification_report(y_test,y_pred))
 ```
 
-     |.|precision|    recall|  f1-score|   support|
-     |---|---|---|---|---|
-
-         | No|       0.83|      0.90|      0.86|      1549|
-         |Yes|       0.64|      0.49|      0.56|       561|
-
-    |accuracy|     ...       |  ...       |      0.79 |     2110|
-  | macro avg|       0.74|      0.70|      0.71|      2110|
+|.|precision|    recall|  f1-score|   support|
+|---|---|---|---|---|
+| No|       0.83|      0.90|      0.86|      1549|
+|Yes|       0.64|      0.49|      0.56|       561|
+|accuracy|...|...|      0.79 |     2110|
+| macro avg|       0.74|      0.70|      0.71|      2110|
 |weighted avg|       0.78|      0.79|      0.78|      2110|
 
 I see very similar accuracy scores and confusion matrix results for both random forest and logistic regression models.
@@ -516,12 +514,11 @@ IMAGE
 print(classification_report(y_test,knn_preds))
 ```
 
-             |.| precision    |recall|  f1-score|   support|
-             |---|---|---|---|---|
-
-         | No|       0.83|      0.86|      0.85|      1549|
-         |Yes|       0.58|      0.52|      0.55|       561|
-    |accuracy|     ...     |   ...        |      0.77 |     2110|
+|.| precision    |recall|  f1-score|   support|
+|---|---|---|---|---|
+| No|       0.83|      0.86|      0.85|      1549|
+|Yes|       0.58|      0.52|      0.55|       561|
+|accuracy|...|...|      0.77 |     2110|
 |   macro avg|       0.70|      0.69|      0.70|      2110|
 |weighted avg|       0.76|      0.77|      0.77|      2110|
 
