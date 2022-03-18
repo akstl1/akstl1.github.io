@@ -68,26 +68,26 @@ df.info()
 |#|   Column|            Non-Null Count|  Dtype|  
 |---|---|---|---|
 | 0 |  customerID|        7032 non-null|   object| 
-| 1   gender |           7032 non-null |  object |
-| 2   SeniorCitizen||     7032 non-null |  int64  |
-| 3   Partner    |       7032 non-null|   object |
-| 4   Dependents  |      7032 non-null|   object |
-| 5   tenure       |     7032 non-null|   int64  |
-| 6   PhoneService      7032 non-null |  object |
-| 7   MultipleLines  |   7032 non-null|   object |
-| 8   InternetService|   7032 non-null|   object |
-| 9   OnlineSecurity |   7032 non-null|   object |
-| 10  OnlineBackup    |  7032 non-null|   object |
-| 11  DeviceProtection|  7032 non-null|   object |
-| 12  TechSupport     |  7032 non-null|   object |
-| 13  StreamingTV    |   7032 non-null|   object |
-| 14  StreamingMovies |  7032 non-null|   object |
-| 15  Contract       |   7032 non-null|   object |
-| 16  PaperlessBilling|  7032 non-null|   object |
-| 17  PaymentMethod   |  7032 non-null|   object |
-| 18  MonthlyCharges |   7032 non-null|   float64|
-| 19  TotalCharges   |   7032 non-null|   float64|
-| 20  Churn         |    7032 non-null|   object |
+| 1 |  gender |           7032 non-null |  object |
+| 2 |  SeniorCitizen|    7032 non-null |  int64  |
+| 3  | Partner    |       7032 non-null|   object |
+| 4   |Dependents  |      7032 non-null|   object |
+| 5   |tenure       |     7032 non-null|   int64  |
+| 6   |PhoneService      7032 non-null |  object |
+| 7   |MultipleLines  |   7032 non-null|   object |
+| 8   |InternetService|   7032 non-null|   object |
+| 9   |OnlineSecurity |   7032 non-null|   object |
+| 10  |OnlineBackup    |  7032 non-null|   object |
+| 11  |DeviceProtection|  7032 non-null|   object |
+| 12  |TechSupport     |  7032 non-null|   object |
+| 13  |StreamingTV    |   7032 non-null|   object |
+| 14  |StreamingMovies |  7032 non-null|   object |
+| 15  |Contract       |   7032 non-null|   object |
+| 16  |PaperlessBilling|  7032 non-null|   object |
+| 17  |PaymentMethod   |  7032 non-null|   object |
+| 18  |MonthlyCharges |   7032 non-null|   float64|
+| 19  |TotalCharges   |   7032 non-null|   float64|
+| 20  |Churn         |    7032 non-null|   object |
  
 Based on the above, I see that there are no null values in the data and thus no imputation/deletion is needed.
  
