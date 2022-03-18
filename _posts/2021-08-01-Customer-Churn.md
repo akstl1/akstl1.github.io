@@ -124,7 +124,7 @@ Next I will generate a countplot of customer churn to see whether the target dat
 sns.countplot(data=df, x='Churn')
 ```
 
-IMAGE
+<img src="1_churn_count_plot.png">
 
 Based on the above plot, I see that the data is imbalanced, with ~2.5x No's than Yes'
 
