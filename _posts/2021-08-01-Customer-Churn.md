@@ -134,6 +134,8 @@ Next I will plot customer churn vs TotalCharges via a violin plot. This can help
 sns.violinplot(data=df,y='TotalCharges',x='Churn')
 ```
 
+<img src="../img/posts/Supervised Learning Capstone Images/2_churn_violin_plot.png">
+
 In the above, I see that there is a jump in TotalChares at ~$1000.
 
 Next, I will plot contract types vs TotalCharges, with a hue of Churn, in boxplots. This can help me determine whether contract type appears to have an influence on churn.
@@ -142,6 +144,7 @@ Next, I will plot contract types vs TotalCharges, with a hue of Churn, in boxplo
 plt.figure(figsize=(14,6))
 sns.boxplot(data=df,x='Contract',y='TotalCharges',hue='Churn')
 ```
+<img src="../img/posts/Supervised Learning Capstone Images/3_contract_bar_plot.png">
 
 Finally, I will create a correlation matrix for features with the churn variable
 
@@ -215,7 +218,7 @@ plt.xticks(rotation=90)
 sns.barplot(x=corr_df['Churn_Yes'].sort_values().iloc[1:-1].index, y=corr_df['Churn_Yes'].sort_values().iloc[1:-1].values)
 ```
 
-IMAGE
+<img src="../img/posts/Supervised Learning Capstone Images/4_correlation_plot.png">
 
 Based on the above, contract month-to-month appears to have the highest correlation to churn. Let's conduct more analysis with the contract features below.
 
@@ -241,7 +244,7 @@ plt.figure(figsize=(15,6))
 sns.histplot(data=df,x='tenure',bins=25)
 ```
 
-IMAGE
+<img src="../img/posts/Supervised Learning Capstone Images/5_tenure_count.png">
 
 There is a wide distribution of tenure in this dataset, with several apparent spikes around 3 months and 70 months. 
 
@@ -252,7 +255,7 @@ plt.figure(figsize=(10,3),dpi=200)
 sns.displot(data=df,x='tenure',bins=70,col='Contract',row='Churn');
 ```
 
-IMAGE
+<img src="../img/posts/Supervised Learning Capstone Images/6_tenure_churn_contract_plots.png">
 
 Based on the above, it would appear that customers with month-to-month contracts tend to have high churn early and then relatively small churn numbers thereafter. 
 
@@ -266,6 +269,8 @@ In addition to tenure, another characteristic at our disposal is the monthly cha
 plt.figure(figsize=(10,5),dpi=200)
 sns.scatterplot(data=df, x='MonthlyCharges', y='TotalCharges', hue='Churn')
 ```
+
+<img src="../img/posts/Supervised Learning Capstone Images/7_monthlycharges_totalcharges.png">
 
 As seen above, customers are shown to churn at many different MonthlyCharges values. However, there does appear to be more churn as MonthlyCharges get higher.
 
@@ -304,7 +309,7 @@ churn_rate.iloc[0].plot()
 plt.ylabel('Churn Rate')
 ```
 
-IMAGE
+<img src="../img/posts/Supervised Learning Capstone Images/8_tenure_churn_timeplot.png">
 
 As seen above, it appears that the generally, higher tenure correlates with lower churn rates.
 
@@ -331,14 +336,14 @@ def tenure_cohort(tenure):
 df['tenure_cohort'] = df['tenure'].apply(tenure_cohort)
 ```
 
-With the new cohort column created, I can now create a scatter plot of total charges vs monthly costs, colored by tenure cohort
+With the new cohort column created, I can now create a scatter plot of total charges vs monthly costs, colored by tenure cohort.
 
 ``` python
 plt.figure(figsize=(10,5),dpi=200)
 sns.scatterplot(data=df, x='MonthlyCharges', y='TotalCharges', hue='tenure_cohort', alpha=0.5)
 ```
 
-IMAGE
+<img src="../img/posts/Supervised Learning Capstone/Images/9_monthlycharges_totalcharges_cohorts.png">
 
 The chart above appears to show that customers with higher tenure tend to have higher TotalCharges and MonthlyCharges. The TotalCharges trend makes sense, since older customers have had more pay cycles and thus have higher cumulative charges on their accounts. 
 
@@ -351,13 +356,15 @@ plt.figure(figsize=(10,5),dpi=200)
 sns.countplot(data=df,x='tenure_cohort',hue='Churn',)
 ```
 
-IMAGE
+<img src="../img/posts/Supervised Learning Capstone/Images/10_cohort_churn_count.png">
 
 ``` python
 plt.figure(figsize=(15,20),dpi=200)
 g = sns.catplot(x="tenure_cohort", hue="Churn", col="Contract",data=df, kind="count");
 ```
 
+ <img src="../img/posts/Supervised Learning Capstone/Images/11_tenure_cohort_churn_count.png">
+ 
 From the above two plots, I see that churn numbers are highest within the first 12 months of tenure.
 
 Further, much of the churn both in the first 12 months and overall occurs in month-to-month contracts.
@@ -418,7 +425,8 @@ preds = grid.predict(X_test)
 plot_confusion_matrix(grid,X_test,y_test)
 ```
 
-IMAGE
+ <img src="../img/posts/Supervised Learning Capstone/Images/12_random_forest_confusion_plot.png">
+
 
 ``` python
 accuracy_score(y_test,preds)
@@ -476,7 +484,7 @@ accuracy_score(y_test,y_pred)
 
 plot_confusion_matrix(grid_model,scaled_X_test,y_test)
 ```
-IMAGE
+ <img src="../img/posts/Supervised Learning Capstone/Images/13_logistic_confusion_plot.png">
 
 ``` python
 print(classification_report(y_test,y_pred))
@@ -510,7 +518,8 @@ knn_preds = grid_knn.predict(scaled_X_test)
 plot_confusion_matrix(grid_knn,scaled_X_test,y_test)
 ```
 
-IMAGE
+ <img src="../img/posts/Supervised Learning Capstone/Images/14_knn_confusion_plot.png">
+
 
 ``` python
 print(classification_report(y_test,knn_preds))
