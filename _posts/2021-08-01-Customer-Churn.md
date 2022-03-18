@@ -65,30 +65,29 @@ df.head()
 df.info()
 ```
 
-ata columns (total 21 columns):
- #   Column            Non-Null Count  Dtype  
----  ------            --------------  -----  
- 0   customerID        7032 non-null   object 
- 1   gender            7032 non-null   object 
- 2   SeniorCitizen     7032 non-null   int64  
- 3   Partner           7032 non-null   object 
- 4   Dependents        7032 non-null   object 
- 5   tenure            7032 non-null   int64  
- 6   PhoneService      7032 non-null   object 
- 7   MultipleLines     7032 non-null   object 
- 8   InternetService   7032 non-null   object 
- 9   OnlineSecurity    7032 non-null   object 
- 10  OnlineBackup      7032 non-null   object 
- 11  DeviceProtection  7032 non-null   object 
- 12  TechSupport       7032 non-null   object 
- 13  StreamingTV       7032 non-null   object 
- 14  StreamingMovies   7032 non-null   object 
- 15  Contract          7032 non-null   object 
- 16  PaperlessBilling  7032 non-null   object 
- 17  PaymentMethod     7032 non-null   object 
- 18  MonthlyCharges    7032 non-null   float64
- 19  TotalCharges      7032 non-null   float64
- 20  Churn             7032 non-null   object 
+|#|   Column|            Non-Null Count|  Dtype|  
+|---|---|---|---|
+| 0 |  customerID|        7032 non-null|   object| 
+| 1   gender |           7032 non-null |  object |
+| 2   SeniorCitizen||     7032 non-null |  int64  |
+| 3   Partner    |       7032 non-null|   object |
+| 4   Dependents  |      7032 non-null|   object |
+| 5   tenure       |     7032 non-null|   int64  |
+| 6   PhoneService      7032 non-null |  object |
+| 7   MultipleLines  |   7032 non-null|   object |
+| 8   InternetService|   7032 non-null|   object |
+| 9   OnlineSecurity |   7032 non-null|   object |
+| 10  OnlineBackup    |  7032 non-null|   object |
+| 11  DeviceProtection|  7032 non-null|   object |
+| 12  TechSupport     |  7032 non-null|   object |
+| 13  StreamingTV    |   7032 non-null|   object |
+| 14  StreamingMovies |  7032 non-null|   object |
+| 15  Contract       |   7032 non-null|   object |
+| 16  PaperlessBilling|  7032 non-null|   object |
+| 17  PaymentMethod   |  7032 non-null|   object |
+| 18  MonthlyCharges |   7032 non-null|   float64|
+| 19  TotalCharges   |   7032 non-null|   float64|
+| 20  Churn         |    7032 non-null|   object |
  
 Based on the above, I see that there are no null values in the data and thus no imputation/deletion is needed.
  
@@ -96,15 +95,15 @@ Based on the above, I see that there are no null values in the data and thus no 
  df.describe()
  ```
  
-SeniorCitizen	tenure	MonthlyCharges	TotalCharges
-count	7032.000000	7032.000000	7032.000000	7032.000000
-mean	0.162400	32.421786	64.798208	2283.300441
-std	0.368844	24.545260	30.085974	2266.771362
-min	0.000000	1.000000	18.250000	18.800000
-25%	0.000000	9.000000	35.587500	401.450000
-50%	0.000000	29.000000	70.350000	1397.475000
-75%	0.000000	55.000000	89.862500	3794.737500
-max	1.000000	72.000000	118.750000	8684.800000
+|SeniorCitizen|	tenure|	MonthlyCharges|	TotalCharges|
+|count|	7032.000000|	7032.000000|	7032.000000|	7032.000000|
+|mean|	0.162400|	32.421786|	64.798208|	2283.300441|
+|std	|0.368844|	24.545260|	30.085974|	2266.771362|
+|min|	0.000000|	1.000000|	18.250000|	18.800000|
+|25%|	0.000000|	9.000000|	35.587500|	401.450000|
+|50%|	0.000000|	29.000000|	70.350000|	1397.475000|
+|75%|	0.000000|	55.000000|	89.862500|	3794.737500|
+|max|	1.000000|	72.000000|	118.750000|	8684.800000|
 
 ### Visual Exploration
 
@@ -148,60 +147,61 @@ Finally, I will create a correlation matrix for features with the churn variable
 df.head()
 ```
 
-gender	SeniorCitizen	Partner	Dependents	tenure	PhoneService	MultipleLines	InternetService	OnlineSecurity	OnlineBackup	DeviceProtection	TechSupport	StreamingTV	StreamingMovies	Contract	PaperlessBilling	PaymentMethod	MonthlyCharges	TotalCharges	Churn
-0	Female	0	Yes	No	1	No	No phone service	DSL	No	Yes	No	No	No	No	Month-to-month	Yes	Electronic check	29.85	29.85	No
-1	Male	0	No	No	34	Yes	No	DSL	Yes	No	Yes	No	No	No	One year	No	Mailed check	56.95	1889.50	No
-2	Male	0	No	No	2	Yes	No	DSL	Yes	Yes	No	No	No	No	Month-to-month	Yes	Mailed check	53.85	108.15	Yes
-3	Male	0	No	No	45	No	No phone service	DSL	Yes	No	Yes	Yes	No	No	One year	No	Bank transfer (automatic)	42.30	1840.75	No
-4	Female	0	No	No	2	Yes	No	Fiber optic	No	No	No	No	No	No	Month-to-month	Yes	Electronic check	70.70	151.65	Yes
+|customerID|	gender|	SeniorCitizen|	Partner|	Dependents|	tenure|	PhoneService|	MultipleLines|	InternetService|	OnlineSecurity|	...|	DeviceProtection|	TechSupport|	StreamingTV|	StreamingMovies|	Contract|	PaperlessBilling|	PaymentMethod|	MonthlyCharges|	TotalCharges|	Churn|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|0|	7590-VHVEG|	Female|	0|	Yes|	No|	1|	No|	No phone service|	DSL|	No|	...|	No|	No|	No|	No|	Month-to-month|	Yes|	Electronic check|	29.85|	29.85|	No|
+|1|	5575-GNVDE|	Male|	0|	No|	No|	34|	Yes|	No	DSL|	Yes|	...|	Yes|	No|	No|	No|	One| year|	No|	Mailed| check|	56.95|	1889.50|	No|
+|2|	3668-QPYBK|	Male|	0|	No|	No|	2|	Yes|	No DSL|	Yes|	...|	No|	No|	No|	No|	Month-to-month|	Yes|	Mailed| check|	53.85	|108.15|	Yes|
+|3|	7795-CFOCW|	Male|	0|	No|	No|	45|	No|	No phone service|	DSL|	Yes|	...|	Yes|	Yes|	No|	No|	One year|	No	Bank transfer (automatic)|	42.30|	1840.75|	No|
+|4|	9237-HQITU|	Female|	0|	No|	No|	2|	Yes|	No Fiber optic|	No|	...|	No|	No|	No|	No|	Month-to-month|	Yes|	Electronic check	|70.70|	151.65|	Yes|
 
 ``` python
 corr_df  = pd.get_dummies(df[['gender', 'SeniorCitizen', 'Partner', 'Dependents','PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport','StreamingTV', 'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod','Churn']]).corr() 
 corr_df['Churn_Yes'].sort_values().iloc[1:-1]
 ```
 
-Contract_Two year                         -0.301552
-StreamingMovies_No internet service       -0.227578
-StreamingTV_No internet service           -0.227578
-TechSupport_No internet service           -0.227578
-DeviceProtection_No internet service      -0.227578
-OnlineBackup_No internet service          -0.227578
-OnlineSecurity_No internet service        -0.227578
-InternetService_No                        -0.227578
-PaperlessBilling_No                       -0.191454
-Contract_One year                         -0.178225
-OnlineSecurity_Yes                        -0.171270
-TechSupport_Yes                           -0.164716
-Dependents_Yes                            -0.163128
-Partner_Yes                               -0.149982
-PaymentMethod_Credit card (automatic)     -0.134687
-InternetService_DSL                       -0.124141
-PaymentMethod_Bank transfer (automatic)   -0.118136
-PaymentMethod_Mailed check                -0.090773
-OnlineBackup_Yes                          -0.082307
-DeviceProtection_Yes                      -0.066193
-MultipleLines_No                          -0.032654
-MultipleLines_No phone service            -0.011691
-PhoneService_No                           -0.011691
-gender_Male                               -0.008545
-gender_Female                              0.008545
-PhoneService_Yes                           0.011691
-MultipleLines_Yes                          0.040033
-StreamingMovies_Yes                        0.060860
-StreamingTV_Yes                            0.063254
-StreamingTV_No                             0.128435
-StreamingMovies_No                         0.130920
-Partner_No                                 0.149982
-SeniorCitizen                              0.150541
-Dependents_No                              0.163128
-PaperlessBilling_Yes                       0.191454
-DeviceProtection_No                        0.252056
-OnlineBackup_No                            0.267595
-PaymentMethod_Electronic check             0.301455
-InternetService_Fiber optic                0.307463
-TechSupport_No                             0.336877
-OnlineSecurity_No                          0.342235
-Contract_Month-to-month                    0.404565
+|Contract_Two year                         |-0.301552|
+|StreamingMovies_No internet service       |-0.227578|
+|StreamingTV_No internet service           |-0.227578|
+|TechSupport_No internet service           |-0.227578|
+|DeviceProtection_No internet service      |-0.227578|
+|OnlineBackup_No internet service          |-0.227578|
+|OnlineSecurity_No internet service        |-0.227578|
+|InternetService_No                        |-0.227578|
+|PaperlessBilling_No                       |-0.191454|
+|Contract_One year                         |-0.178225|
+|OnlineSecurity_Yes                        |-0.171270|
+|TechSupport_Yes                           |-0.164716|
+|Dependents_Yes                            |-0.163128|
+|Partner_Yes                               |-0.149982|
+|PaymentMethod_Credit card (automatic)     |-0.134687|
+|InternetService_DSL                       |-0.124141|
+|PaymentMethod_Bank transfer (automatic)   |-0.118136|
+|PaymentMethod_Mailed check                |-0.090773|
+|OnlineBackup_Yes                          |-0.082307|
+|DeviceProtection_Yes                      |-0.066193|
+|MultipleLines_No                          |-0.032654|
+|MultipleLines_No phone service            |-0.011691|
+|PhoneService_No                           |-0.011691|
+|gender_Male                               |-0.008545|
+|gender_Female                             | 0.008545|
+|PhoneService_Yes                          | 0.011691|
+|MultipleLines_Yes                         | 0.040033|
+|StreamingMovies_Yes                       | 0.060860|
+|StreamingTV_Yes                           | 0.063254|
+|StreamingTV_No                            | 0.128435|
+|StreamingMovies_No                        | 0.130920|
+|Partner_No                                | 0.149982|
+|SeniorCitizen                             | 0.150541|
+|Dependents_No                             | 0.163128|
+|PaperlessBilling_Yes                      | 0.191454|
+|DeviceProtection_No                       | 0.252056|
+|OnlineBackup_No                           | 0.267595|
+|PaymentMethod_Electronic check            | 0.301455|
+|InternetService_Fiber optic               | 0.307463|
+|TechSupport_No                            | 0.336877|
+|OnlineSecurity_No                         | 0.342235|
+|Contract_Month-to-month                   | 0.404565|
 
 ### Plot the correlation of features with churn
 
@@ -279,18 +279,18 @@ churn_rate = 100*yes_churn / (no_churn+yes_churn)
 churn_rate.transpose()['gender']
 ```
 
-tenure
-1     61.990212
-2     51.680672
-3     47.000000
-4     47.159091
-5     48.120301
-        ...    
-68     9.000000
-69     8.421053
-70     9.243697
-71     3.529412
-72     1.657459
+|#|tenure|
+|1     |61.990212|
+|2     |51.680672|
+|3     |47.000000|
+|4     |47.159091|
+|5     |48.120301|
+| ...  |     ...  |  
+|68    |9.000000|
+|69    | 8.421053|
+|70    | 9.243697|
+|71    | 3.529412|
+|72    | 1.657459|
 
 With the above data created, I will now plot churn rate per month.
 
@@ -426,14 +426,13 @@ print(classification_report(y_test,preds))
 ```
 
 
-              precision    recall  f1-score   support
+         |     |precision|    recall|  f1-score|   support|
 
-          No       0.82      0.91      0.87      1549
-         Yes       0.66      0.46      0.54       561
-
-    accuracy                           0.79      2110
-   macro avg       0.74      0.69      0.70      2110
-weighted avg       0.78      0.79      0.78      2110
+         | No|       0.82|      0.91|      0.87|      1549|
+         |Yes|       0.66|      0.46|      0.54|       561|
+   | accuracy|            |         |     | 0.79|      2110|
+   |macro avg|      | 0.74 |     0.69 |     0.70 |     2110|
+|weighted avg  |     0.78   |   0.79    |  0.78  |    2110|
 
 From the above, we see that a random forest model is ~79% accurate overall.
 
@@ -478,14 +477,14 @@ IMAGE
 print(classification_report(y_test,y_pred))
 ```
 
-     precision    recall  f1-score   support
+     ||precision|    recall|  f1-score|   support|
 
-          No       0.83      0.90      0.86      1549
-         Yes       0.64      0.49      0.56       561
+         | No|       0.83|      0.90|      0.86|      1549|
+         |Yes|       0.64|      0.49|      0.56|       561|
 
-    accuracy                           0.79      2110
-   macro avg       0.74      0.70      0.71      2110
-weighted avg       0.78      0.79      0.78      2110
+    |accuracy|            |         |      0.79 |     2110|
+  | macro avg|       0.74|      0.70|      0.71|      2110|
+|weighted avg|       0.78|      0.79|      0.78|      2110|
 
 I see very similar accuracy scores and confusion matrix results for both random forest and logistic regression models.
 
@@ -513,14 +512,13 @@ IMAGE
 print(classification_report(y_test,knn_preds))
 ```
 
-              precision    recall  f1-score   support
+             || precision    |recall|  f1-score|   support|
 
-          No       0.83      0.86      0.85      1549
-         Yes       0.58      0.52      0.55       561
-
-    accuracy                           0.77      2110
-   macro avg       0.70      0.69      0.70      2110
-weighted avg       0.76      0.77      0.77      2110
+         | No|       0.83|      0.86|      0.85|      1549|
+         |Yes|       0.58|      0.52|      0.55|       561|
+    |accuracy|          |           |      0.77 |     2110|
+|   macro avg|       0.70|      0.69|      0.70|      2110|
+|weighted avg|       0.76|      0.77|      0.77|      2110|
 
 The KNN model performs slightly worse than our other two models.
 
