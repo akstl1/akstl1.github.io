@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Telecom
+title: Telecom Customer Churn Prediction
 image: "/posts/Churn.jpg"
-tags: [Python, Classification, Random Forest, KNN, Logistic Classification]
+tags: [Churn Analysis, Classification, Random Forest, KNN, Logistic Classification, Python]
 ---
 
 # Supervised Learning Capstone Project
@@ -55,13 +55,13 @@ After loading in the data I look at the data structure, check for null values to
 df.head()
 ```
 
-|customerID|	gender|	SeniorCitizen|	Partner|	Dependents|	tenure|	PhoneService|	MultipleLines|	InternetService|	OnlineSecurity|	...|	DeviceProtection|	TechSupport|	StreamingTV|	StreamingMovies|	Contract|	PaperlessBilling|	PaymentMethod|	MonthlyCharges|	TotalCharges|	Churn|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|0|	7590-VHVEG|	Female|	0|	Yes|	No|	1|	No|	No phone service|	DSL|	No|	...|	No|	No|	No|	No|	Month-to-month|	Yes|	Electronic check|	29.85|	29.85|	No|
-|1|	5575-GNVDE|	Male|	0|	No|	No|	34|	Yes|	No	DSL|	Yes|	...|	Yes|	No|	No|	No|	One| year|	No|	Mailed| check|	56.95|	1889.50|	No|
-|2|	3668-QPYBK|	Male|	0|	No|	No|	2|	Yes|	No DSL|	Yes|	...|	No|	No|	No|	No|	Month-to-month|	Yes|	Mailed| check|	53.85	|108.15|	Yes|
-|3|	7795-CFOCW|	Male|	0|	No|	No|	45|	No|	No phone service|	DSL|	Yes|	...|	Yes|	Yes|	No|	No|	One year|	No	Bank transfer (automatic)|	42.30|	1840.75|	No|
-|4|	9237-HQITU|	Female|	0|	No|	No|	2|	Yes|	No Fiber optic|	No|	...|	No|	No|	No|	No|	Month-to-month|	Yes|	Electronic check	|70.70|	151.65|	Yes|
+|customerID|	gender|	SeniorCitizen|	Partner|	Dependents|	tenure|	PhoneService|	MultipleLines|	InternetService|	OnlineSecurity|	...|	MonthlyCharges|	TotalCharges|	Churn|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|0|	7590-VHVEG|	Female|	0|	Yes|	No|	1|	No|	No phone service|	DSL|	No|	...|	29.85|	29.85|	No|
+|1|	5575-GNVDE|	Male|	0|	No|	No|	34|	Yes|	No	DSL|	Yes|	...|	56.95|	1889.50|	No|
+|2|	3668-QPYBK|	Male|	0|	No|	No|	2|	Yes|	No DSL|	Yes|	...|53.85	|108.15|	Yes|
+|3|	7795-CFOCW|	Male|	0|	No|	No|	45|	No|	No phone service|	DSL|	Yes|	...|	42.30|	1840.75|	No|
+|4|	9237-HQITU|	Female|	0|	No|	No|	2|	Yes|	No Fiber optic|	No|	...|	70.70|	151.65|	Yes|
 
 ``` python
 df.info()
@@ -153,13 +153,13 @@ Finally, I will create a correlation matrix for features with the churn variable
 df.head()
 ```
 
-|customerID|	gender|	SeniorCitizen|	Partner|	Dependents|	tenure|	PhoneService|	MultipleLines|	InternetService|	OnlineSecurity|	...|	DeviceProtection|	TechSupport|	StreamingTV|	StreamingMovies|	Contract|	PaperlessBilling|	PaymentMethod|	MonthlyCharges|	TotalCharges|	Churn|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|0|	7590-VHVEG|	Female|	0|	Yes|	No|	1|	No|	No phone service|	DSL|	No|	...|	No|	No|	No|	No|	Month-to-month|	Yes|	Electronic check|	29.85|	29.85|	No|
-|1|	5575-GNVDE|	Male|	0|	No|	No|	34|	Yes|	No	DSL|	Yes|	...|	Yes|	No|	No|	No|	One| year|	No|	Mailed| check|	56.95|	1889.50|	No|
-|2|	3668-QPYBK|	Male|	0|	No|	No|	2|	Yes|	No DSL|	Yes|	...|	No|	No|	No|	No|	Month-to-month|	Yes|	Mailed| check|	53.85	|108.15|	Yes|
-|3|	7795-CFOCW|	Male|	0|	No|	No|	45|	No|	No phone service|	DSL|	Yes|	...|	Yes|	Yes|	No|	No|	One year|	No	Bank transfer (automatic)|	42.30|	1840.75|	No|
-|4|	9237-HQITU|	Female|	0|	No|	No|	2|	Yes|	No Fiber optic|	No|	...|	No|	No|	No|	No|	Month-to-month|	Yes|	Electronic check	|70.70|	151.65|	Yes|
+|customerID|	gender|	SeniorCitizen|	Partner|	Dependents|	tenure|	PhoneService|	MultipleLines|	InternetService|	OnlineSecurity|	...|	MonthlyCharges|	TotalCharges|	Churn|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|0|	7590-VHVEG|	Female|	0|	Yes|	No|	1|	No|	No phone service|	DSL|	No|	...|	29.85|	29.85|	No|
+|1|	5575-GNVDE|	Male|	0|	No|	No|	34|	Yes|	No	DSL|	Yes|	...|	56.95|	1889.50|	No|
+|2|	3668-QPYBK|	Male|	0|	No|	No|	2|	Yes|	No DSL|	Yes|	...|53.85	|108.15|	Yes|
+|3|	7795-CFOCW|	Male|	0|	No|	No|	45|	No|	No phone service|	DSL|	Yes|	...|	42.30|	1840.75|	No|
+|4|	9237-HQITU|	Female|	0|	No|	No|	2|	Yes|	No Fiber optic|	No|	...|	70.70|	151.65|	Yes|
 
 ``` python
 corr_df  = pd.get_dummies(df[['gender', 'SeniorCitizen', 'Partner', 'Dependents','PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport','StreamingTV', 'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod','Churn']]).corr() 
