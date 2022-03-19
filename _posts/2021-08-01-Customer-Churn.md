@@ -11,8 +11,8 @@ In this notebook, telecom customer data was read in to determine whether custome
 
 One key insight from the data was also that customers with month-to-month contracts are more likely to churn than other customers. In this subset of customers, the shorter tenure a customer has the higher they are to churn.
 
-Note that the code for this project can also be found at the following Github repository: <a href="https://github.com/akstl1/Supervised-Learning-Capstone">Supervised-Learning-Capstone <a/>.
-
+<!-- Note that the code for this project can also be found at the following Github repository: <a href="https://github.com/akstl1/Supervised-Learning-Capstone">Supervised-Learning-Capstone <a/>.
+ -->
 <i>Please note that this project was done as part of the 2021 Python for Machine Learning & Data Science Masterclass on Udemy</i>
 
 ### Summary of Results
@@ -319,6 +319,17 @@ Based on the tenure column values above, I can create a new column called Tenure
 - 24-48 months
 - over 48 months
  
+``` python
+
+def tenure_cohort(tenure):
+    if tenure<13:
+        return '0-12 months'
+    elif tenure<25:
+        return '12-24 months'
+    elif tenure<49:
+        return '24-48 months'
+    return 'over 48 months' 
+```
 
  
 <img src="../img/posts/Supervised Learning Capstone Images/9_monthlycharges_totalcharges_cohorts.png">
