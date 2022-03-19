@@ -7,8 +7,6 @@ tags: [Churn Analysis, Classification, Random Forest, KNN, Logistic Classificati
 
 # Supervised Learning Capstone Project
 
-<img src="/img/posts/Supervised Learning Capstone Images/1_churn_count_plot.png">
-
 In this notebook, telecom customer data was read in to determine whether customer churn can be predicted. As shown below, both random forest and logistic regression modelling yielded similar results with accuracies of ~80% on the test set data.
 
 One key insight from the data was also that customers with month-to-month contracts are more likely to churn than other customers. In this subset of customers, the shorter tenure a customer has the higher they are to churn.
@@ -57,13 +55,13 @@ After loading in the data I look at the data structure, check for null values to
 df.head()
 ```
 
-|customerID|	gender|	SeniorCitizen|	Partner|	Dependents|	tenure|	PhoneService|	MultipleLines|	InternetService|	OnlineSecurity|	...|	MonthlyCharges|	TotalCharges|	Churn|
+|customerID|	gender|	Dependents|	tenure|	PhoneService|	MultipleLines|	InternetService|	OnlineSecurity|	...|	MonthlyCharges|	TotalCharges|	Churn|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|0|	7590-VHVEG|	Female|	0|	Yes|	No|	1|	No|	No phone service|	DSL|	No|	...|	29.85|	29.85|	No|
-|1|	5575-GNVDE|	Male|	0|	No|	No|	34|	Yes|	No	DSL|	Yes|	...|	56.95|	1889.50|	No|
-|2|	3668-QPYBK|	Male|	0|	No|	No|	2|	Yes|	No DSL|	Yes|	...|53.85	|108.15|	Yes|
-|3|	7795-CFOCW|	Male|	0|	No|	No|	45|	No|	No phone service|	DSL|	Yes|	...|	42.30|	1840.75|	No|
-|4|	9237-HQITU|	Female|	0|	No|	No|	2|	Yes|	No Fiber optic|	No|	...|	70.70|	151.65|	Yes|
+|0|	Female|	No|	1|	No|	No phone service|	DSL|	No|	...|	29.85|	29.85|	No|
+|1|	Male|	No|	34|	Yes|	No	DSL|	Yes|	...|	56.95|	1889.50|	No|
+|2|	Male|	No|	2|	Yes|	No DSL|	Yes|	...|53.85	|108.15|	Yes|
+|3|	Male|	No|	45|	No|	No phone service|	DSL|	Yes|	...|	42.30|	1840.75|	No|
+|4| Female|	No|	2|	Yes|	No Fiber optic|	No|	...|	70.70|	151.65|	Yes|
 
 ``` python
 df.info()
@@ -126,7 +124,7 @@ Next I will generate a countplot of customer churn to see whether the target dat
 sns.countplot(data=df, x='Churn')
 ```
 
-<img src="../img/posts/Supervised Learning Capstone Images/1_churn_count_plot.png">
+<img src="/img/posts/Supervised Learning Capstone Images/1_churn_count_plot.png">
 
 Based on the above plot, I see that the data is imbalanced, with ~2.5x No's than Yes'
 
@@ -136,7 +134,7 @@ Next I will plot customer churn vs TotalCharges via a violin plot. This can help
 sns.violinplot(data=df,y='TotalCharges',x='Churn')
 ```
 
-<img src="../img/posts/Supervised Learning Capstone Images/2_churn_violin_plot.png">
+<img src="/img/posts/Supervised Learning Capstone Images/2_churn_violin_plot.png">
 
 In the above, I see that there is a jump in TotalChares at ~$1000.
 
@@ -155,13 +153,14 @@ Finally, I will create a correlation matrix for features with the churn variable
 df.head()
 ```
 
-|customerID|	gender|	SeniorCitizen|	Partner|	Dependents|	tenure|	PhoneService|	MultipleLines|	InternetService|	OnlineSecurity|	...|	MonthlyCharges|	TotalCharges|	Churn|
+|customerID|	gender|	Dependents|	tenure|	PhoneService|	MultipleLines|	InternetService|	OnlineSecurity|	...|	MonthlyCharges|	TotalCharges|	Churn|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|0|	7590-VHVEG|	Female|	0|	Yes|	No|	1|	No|	No phone service|	DSL|	No|	...|	29.85|	29.85|	No|
-|1|	5575-GNVDE|	Male|	0|	No|	No|	34|	Yes|	No	DSL|	Yes|	...|	56.95|	1889.50|	No|
-|2|	3668-QPYBK|	Male|	0|	No|	No|	2|	Yes|	No DSL|	Yes|	...|53.85	|108.15|	Yes|
-|3|	7795-CFOCW|	Male|	0|	No|	No|	45|	No|	No phone service|	DSL|	Yes|	...|	42.30|	1840.75|	No|
-|4|	9237-HQITU|	Female|	0|	No|	No|	2|	Yes|	No Fiber optic|	No|	...|	70.70|	151.65|	Yes|
+|0|	Female|	No|	1|	No|	No phone service|	DSL|	No|	...|	29.85|	29.85|	No|
+|1|	Male|	No|	34|	Yes|	No	DSL|	Yes|	...|	56.95|	1889.50|	No|
+|2|	Male|	No|	2|	Yes|	No DSL|	Yes|	...|53.85	|108.15|	Yes|
+|3|	Male|	No|	45|	No|	No phone service|	DSL|	Yes|	...|	42.30|	1840.75|	No|
+|4| Female|	No|	2|	Yes|	No Fiber optic|	No|	...|	70.70|	151.65|	Yes|
+
 
 ``` python
 corr_df  = pd.get_dummies(df[['gender', 'SeniorCitizen', 'Partner', 'Dependents','PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport','StreamingTV', 'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod','Churn']]).corr() 
@@ -201,7 +200,7 @@ plt.xticks(rotation=90)
 sns.barplot(x=corr_df['Churn_Yes'].sort_values().iloc[1:-1].index, y=corr_df['Churn_Yes'].sort_values().iloc[1:-1].values)
 ```
 
-<img src="../img/posts/Supervised Learning Capstone Images/4_correlation_plot.png">
+<img src="/img/posts/Supervised Learning Capstone Images/4_correlation_plot.png">
 
 Based on the above, contract month-to-month appears to have the highest correlation to churn. Let's conduct more analysis with the contract features below.
 
@@ -227,7 +226,7 @@ plt.figure(figsize=(15,6))
 sns.histplot(data=df,x='tenure',bins=25)
 ```
 
-<img src="../img/posts/Supervised Learning Capstone Images/5_tenure_count.png">
+<img src="/img/posts/Supervised Learning Capstone Images/5_tenure_count.png">
 
 There is a wide distribution of tenure in this dataset, with several apparent spikes around 3 months and 70 months. 
 
@@ -238,7 +237,7 @@ plt.figure(figsize=(10,3),dpi=200)
 sns.displot(data=df,x='tenure',bins=70,col='Contract',row='Churn');
 ```
 
-<img src="../img/posts/Supervised Learning Capstone Images/6_tenure_churn_contract_plots.png">
+<img src="/img/posts/Supervised Learning Capstone Images/6_tenure_churn_contract_plots.png">
 
 Based on the above, it would appear that customers with month-to-month contracts tend to have high churn early and then relatively small churn numbers thereafter. 
 
@@ -253,7 +252,7 @@ plt.figure(figsize=(10,5),dpi=200)
 sns.scatterplot(data=df, x='MonthlyCharges', y='TotalCharges', hue='Churn')
 ```
 
-<img src="../img/posts/Supervised Learning Capstone Images/7_monthlycharges_totalcharges.png">
+<img src="/img/posts/Supervised Learning Capstone Images/7_monthlycharges_totalcharges.png">
 
 As seen above, customers are shown to churn at many different MonthlyCharges values. However, there does appear to be more churn as MonthlyCharges get higher.
 
@@ -292,7 +291,7 @@ churn_rate.iloc[0].plot()
 plt.ylabel('Churn Rate')
 ```
 
-<img src="../img/posts/Supervised Learning Capstone Images/8_tenure_churn_timeplot.png">
+<img src="/img/posts/Supervised Learning Capstone Images/8_tenure_churn_timeplot.png">
  
 As seen above, it appears that the generally, higher tenure correlates with lower churn rates.
 
@@ -324,7 +323,7 @@ plt.figure(figsize=(10,5),dpi=200)
 sns.scatterplot(data=df, x='MonthlyCharges', y='TotalCharges', hue='tenure_cohort', alpha=0.5)
 ```
  
-<img src="../img/posts/Supervised Learning Capstone Images/9_monthlycharges_totalcharges_cohorts.png">
+<img src="/img/posts/Supervised Learning Capstone Images/9_monthlycharges_totalcharges_cohorts.png">
 
 The chart above appears to show that customers with higher tenure tend to have higher TotalCharges and MonthlyCharges. The TotalCharges trend makes sense, since older customers have had more pay cycles and thus have higher cumulative charges on their accounts. 
 
@@ -337,14 +336,14 @@ plt.figure(figsize=(10,5),dpi=200)
 sns.countplot(data=df,x='tenure_cohort',hue='Churn',)
 ```
 
-<img src="../img/posts/Supervised Learning Capstone Images/10_cohort_churn_count.png">
+<img src="/img/posts/Supervised Learning Capstone Images/10_cohort_churn_count.png">
 
 ``` python
 plt.figure(figsize=(15,20),dpi=200)
 g = sns.catplot(x="tenure_cohort", hue="Churn", col="Contract",data=df, kind="count");
 ```
 
-<img src="../img/posts/Supervised Learning Capstone Images/11_tenure_cohort_churn_count.png">
+<img src="/img/posts/Supervised Learning Capstone Images/11_tenure_cohort_churn_count.png">
  
 From the above two plots, I see that churn numbers are highest within the first 12 months of tenure.
 
@@ -406,7 +405,7 @@ preds = grid.predict(X_test)
 plot_confusion_matrix(grid,X_test,y_test)
 ```
 
-<img src="../img/posts/Supervised Learning Capstone Images/12_random_forest_confusion_plot.png">
+<img src="/img/posts/Supervised Learning Capstone Images/12_random_forest_confusion_plot.png">
 
 
 ``` python
@@ -465,7 +464,7 @@ accuracy_score(y_test,y_pred)
 
 plot_confusion_matrix(grid_model,scaled_X_test,y_test)
 ```
-<img src="../img/posts/Supervised Learning Capstone Images/13_logistic_confusion_plot.png">
+<img src="/img/posts/Supervised Learning Capstone Images/13_logistic_confusion_plot.png">
 
 ``` python
 print(classification_report(y_test,y_pred))
@@ -499,7 +498,7 @@ knn_preds = grid_knn.predict(scaled_X_test)
 plot_confusion_matrix(grid_knn,scaled_X_test,y_test)
 ```
 
-<img src="../img/posts/Supervised Learning Capstone Images/14_knn_confusion_plot.png">
+<img src="/img/posts/Supervised Learning Capstone Images/14_knn_confusion_plot.png">
 
 
 ``` python
