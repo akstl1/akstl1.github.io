@@ -7,6 +7,8 @@ tags: [Churn Analysis, Classification, Random Forest, KNN, Logistic Classificati
 
 # Supervised Learning Capstone Project
 
+<img src="../img/posts/Supervised Learning Capstone Images/1_churn_count_plot.png">
+
 In this notebook, telecom customer data was read in to determine whether customer churn can be predicted. As shown below, both random forest and logistic regression modelling yielded similar results with accuracies of ~80% on the test set data.
 
 One key insight from the data was also that customers with month-to-month contracts are more likely to churn than other customers. In this subset of customers, the shorter tenure a customer has the higher they are to churn.
