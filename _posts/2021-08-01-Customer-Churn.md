@@ -321,13 +321,15 @@ Based on the tenure column values above, I can create a new column called Tenure
 
 ``` python
 # the function below adds a new column based on tenure cohort values above
+```
 
+``` python
 def tenure_cohort(tenure):
-    if tenure<13:
+    if 13>tenure:
         return '0-12 months'
-    elif tenure<25:
+    elif 25>tenure:
         return '12-24 months'
-    elif tenure<49:
+    elif 49>tenure:
         return '24-48 months'
     return 'over 48 months'
 ```
