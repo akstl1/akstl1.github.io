@@ -310,9 +310,7 @@ plt.ylabel('Churn Rate')
 ```
 
 <img src="../img/posts/Supervised Learning Capstone Images/8_tenure_churn_timeplot.png">
-
-As seen above, it appears that the generally, higher tenure correlates with lower churn rates.
-
+<img src="../img/posts/Supervised Learning Capstone Images/8_tenure_churn_timeplot.png">
 
 
 <img src="../img/posts/Supervised Learning Capstone/Images/8_tenure_churn_timeplot.png">
