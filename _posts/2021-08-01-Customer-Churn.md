@@ -331,6 +331,15 @@ def tenure_cohort(tenure):
     return 'over 48 months' 
 ```
 
+``` python
+df['tenure_cohort'] = df['tenure'].apply(tenure_cohort)
+```
+With the new cohort column created, I can now create a scatter plot of total charges vs monthly costs, colored by tenure cohort
+
+``` python
+plt.figure(figsize=(10,5),dpi=200)
+sns.scatterplot(data=df, x='MonthlyCharges', y='TotalCharges', hue='tenure_cohort', alpha=0.5)
+```
  
 <img src="../img/posts/Supervised Learning Capstone Images/9_monthlycharges_totalcharges_cohorts.png">
 
