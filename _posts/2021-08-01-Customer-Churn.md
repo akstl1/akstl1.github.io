@@ -311,6 +311,15 @@ plt.ylabel('Churn Rate')
 
 <img src="../img/posts/Supervised Learning Capstone Images/8_tenure_churn_timeplot.png">
  
+As seen above, it appears that the generally, higher tenure correlates with lower churn rates.
+
+Based on the tenure column values above, I can create a new column called Tenure Cohort that create 4 categories:
+- 0-12 months
+- 12-24 months
+- 24-48 months
+- over 48 months
+ 
+
  
 <img src="../img/posts/Supervised Learning Capstone Images/9_monthlycharges_totalcharges_cohorts.png">
 
