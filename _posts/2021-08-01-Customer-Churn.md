@@ -11,8 +11,8 @@ In this notebook, telecom customer data was read in to determine whether custome
 
 One key insight from the data was also that customers with month-to-month contracts are more likely to churn than other customers. In this subset of customers, the shorter tenure a customer has the higher they are to churn.
 
-<!-- Note that the code for this project can also be found at the following Github repository: <a href="https://github.com/akstl1/Supervised-Learning-Capstone">here</a>
- -->
+Note that the code for this project can also be found at the following Github repository: <a href="https://github.com/akstl1/Supervised-Learning-Capstone">here</a>
+
 <i>Please note that this project was done as part of the 2021 Python for Machine Learning & Data Science Masterclass on Udemy</i>
 
 ### Summary of Results
