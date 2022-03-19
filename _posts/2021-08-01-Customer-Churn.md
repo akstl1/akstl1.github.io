@@ -313,28 +313,7 @@ plt.ylabel('Churn Rate')
 
 As seen above, it appears that the generally, higher tenure correlates with lower churn rates.
 
-Based on the tenure column values above, I can create a new column called Tenure Cohort that create 4 categories:
-- 0-12 months
-- 12-24 months
-- 24-48 months
-- over 48 months
 
-``` python
-# the function below adds a new column based on tenure cohort values above
-```
-
-
-
-``` python
-df['tenure_cohort'] = df['tenure'].apply(tenure_cohort)
-```
-
-With the new cohort column created, I can now create a scatter plot of total charges vs monthly costs, colored by tenure cohort.
-
-``` python
-plt.figure(figsize=(10,5),dpi=200)
-sns.scatterplot(data=df, x='MonthlyCharges', y='TotalCharges', hue='tenure_cohort', alpha=0.5)
-```
 
 <img src="../img/posts/Supervised Learning Capstone/Images/9_monthlycharges_totalcharges_cohorts.png">
 
