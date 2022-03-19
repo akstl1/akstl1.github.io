@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Telecom
-image: "/posts/heart_disease_1.jpg"
+image: "/posts/Churn.jpg"
 tags: [Python, Classification, Random Forest, KNN, Logistic Classification]
 ---
 
