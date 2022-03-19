@@ -310,10 +310,9 @@ plt.ylabel('Churn Rate')
 ```
 
 <img src="../img/posts/Supervised Learning Capstone Images/8_tenure_churn_timeplot.png">
+ 
+ 
 <img src="../img/posts/Supervised Learning Capstone Images/9_monthlycharges_totalcharges_cohorts.png">
-
-
-<img src="../img/posts/Supervised Learning Capstone/Images/8_tenure_churn_timeplot.png">
 
 The chart above appears to show that customers with higher tenure tend to have higher TotalCharges and MonthlyCharges. The TotalCharges trend makes sense, since older customers have had more pay cycles and thus have higher cumulative charges on their accounts. 
 
@@ -326,14 +325,14 @@ plt.figure(figsize=(10,5),dpi=200)
 sns.countplot(data=df,x='tenure_cohort',hue='Churn',)
 ```
 
-<img src="../img/posts/Supervised Learning Capstone/Images/10_cohort_churn_count.png">
+<img src="../img/posts/Supervised Learning Capstone Images/10_cohort_churn_count.png">
 
 ``` python
 plt.figure(figsize=(15,20),dpi=200)
 g = sns.catplot(x="tenure_cohort", hue="Churn", col="Contract",data=df, kind="count");
 ```
 
- <img src="../img/posts/Supervised Learning Capstone/Images/11_tenure_cohort_churn_count.png">
+<img src="../img/posts/Supervised Learning Capstone Images/11_tenure_cohort_churn_count.png">
  
 From the above two plots, I see that churn numbers are highest within the first 12 months of tenure.
 
@@ -395,7 +394,7 @@ preds = grid.predict(X_test)
 plot_confusion_matrix(grid,X_test,y_test)
 ```
 
- <img src="../img/posts/Supervised Learning Capstone/Images/12_random_forest_confusion_plot.png">
+<img src="../img/posts/Supervised Learning Capstone Images/12_random_forest_confusion_plot.png">
 
 
 ``` python
@@ -454,7 +453,7 @@ accuracy_score(y_test,y_pred)
 
 plot_confusion_matrix(grid_model,scaled_X_test,y_test)
 ```
- <img src="../img/posts/Supervised Learning Capstone/Images/13_logistic_confusion_plot.png">
+<img src="../img/posts/Supervised Learning Capstone Images/13_logistic_confusion_plot.png">
 
 ``` python
 print(classification_report(y_test,y_pred))
@@ -488,7 +487,7 @@ knn_preds = grid_knn.predict(scaled_X_test)
 plot_confusion_matrix(grid_knn,scaled_X_test,y_test)
 ```
 
- <img src="../img/posts/Supervised Learning Capstone/Images/14_knn_confusion_plot.png">
+<img src="../img/posts/Supervised Learning Capstone Images/14_knn_confusion_plot.png">
 
 
 ``` python
