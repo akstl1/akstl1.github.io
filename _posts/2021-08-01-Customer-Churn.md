@@ -423,8 +423,8 @@ print(classification_report(y_test,preds))
 |---|---|---|---|---|
 | No|       0.82|      0.91|      0.87|      1549|
 |Yes|       0.66|      0.46|      0.54|       561|
-| accuracy|...|...|     | 0.79|      2110|
-|macro avg|      | 0.74 |     0.69 |     0.70 |     2110|
+| accuracy|...|...|   0.79|      2110|
+|macro avg|     0.74 |     0.69 |     0.70 |     2110|
 |weighted avg  |     0.78   |   0.79    |  0.78  |    2110|
 
 From the above, we see that a random forest model is ~79% accurate overall.
