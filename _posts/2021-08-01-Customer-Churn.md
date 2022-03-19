@@ -144,7 +144,7 @@ Next, I will plot contract types vs TotalCharges, with a hue of Churn, in boxplo
 plt.figure(figsize=(14,6))
 sns.boxplot(data=df,x='Contract',y='TotalCharges',hue='Churn')
 ```
-<img src="../img/posts/Supervised Learning Capstone Images/3_contract_bar_plot.png">
+<img src="/img/posts/Supervised Learning Capstone Images/3_contract_bar_plot.png">
 
 Finally, I will create a correlation matrix for features with the churn variable
 
@@ -204,7 +204,7 @@ sns.barplot(x=corr_df['Churn_Yes'].sort_values().iloc[1:-1].index, y=corr_df['Ch
 
 Based on the above, contract month-to-month appears to have the highest correlation to churn. Let's conduct more analysis with the contract features below.
 
- # Churn Analysis
+# Churn Analysis
  
  Now that I have explored the data, I can begin to analyze churn in the dataset.
 
