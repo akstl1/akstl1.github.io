@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Telecom Customer Churn Prediction
-image: "/posts/vehicle_emissions.jpg"
-tags: [Churn Analysis, Classification, Random Forest, KNN, Logistic Regression]
+title: Telecom
+image: "/posts/heart_disease_1.jpg"
+tags: [Python, Classification, Random Forest, KNN, Logistic Classification]
 ---
 
 # Supervised Learning Capstone Project
