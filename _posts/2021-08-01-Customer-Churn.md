@@ -7,7 +7,7 @@ tags: [Churn Analysis, Classification, Random Forest, KNN, Logistic Classificati
 
 # Supervised Learning Capstone Project
 
-<img src="../img/posts/Supervised Learning Capstone Images/1_churn_count_plot.png">
+<img src="/img/posts/Supervised Learning Capstone Images/1_churn_count_plot.png">
 
 In this notebook, telecom customer data was read in to determine whether customer churn can be predicted. As shown below, both random forest and logistic regression modelling yielded similar results with accuracies of ~80% on the test set data.
 
