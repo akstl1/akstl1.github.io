@@ -323,16 +323,7 @@ Based on the tenure column values above, I can create a new column called Tenure
 # the function below adds a new column based on tenure cohort values above
 ```
 
-``` python
-def tenure_cohort(tenure):
-    if 13>tenure:
-        return '0-12 months'
-    elif 25>tenure:
-        return '12-24 months'
-    elif 49>tenure:
-        return '24-48 months'
-    return 'over 48 months'
-```
+
 
 ``` python
 df['tenure_cohort'] = df['tenure'].apply(tenure_cohort)
