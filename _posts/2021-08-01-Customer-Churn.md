@@ -59,7 +59,7 @@ df.head()
 |---|---|---|---|---|---|---|---|---|---|---|---|
 |0|	Female|	No|	1|	No|	No phone service|	DSL|	No|	...|	29.85|	29.85|	No|
 |1|	Male|	No|	34|	Yes|	No	DSL|	Yes|	Yes|...|	56.95|	1889.50|	No|
-|2|	Male|	No|	2|	Yes|	No DSL|	Yes|	...|Yes|53.85	|108.15|	Yes|
+|2|	Male|	No|	2|	Yes|	No DSL|	Yes|	Yes|...|53.85	|108.15|	Yes|
 |3|	Male|	No|	45|	No|	No phone service|	DSL|	Yes|	...|	42.30|	1840.75|	No|
 |4| Female|	No|	2|	Yes|	No Fiber optic|	No|Yes|	...|	70.70|	151.65|	Yes|
 
@@ -157,7 +157,7 @@ df.head()
 |---|---|---|---|---|---|---|---|---|---|---|---|
 |0|	Female|	No|	1|	No|	No phone service|	DSL|	No|	...|	29.85|	29.85|	No|
 |1|	Male|	No|	34|	Yes|	No	DSL|	Yes|	Yes|...|	56.95|	1889.50|	No|
-|2|	Male|	No|	2|	Yes|	No DSL|	Yes|	...|Yes|53.85	|108.15|	Yes|
+|2|	Male|	No|	2|	Yes|	No DSL|	Yes|	Yes|...|53.85	|108.15|	Yes|
 |3|	Male|	No|	45|	No|	No phone service|	DSL|	Yes|	...|	42.30|	1840.75|	No|
 |4| Female|	No|	2|	Yes|	No Fiber optic|	No|Yes|	...|	70.70|	151.65|	Yes|
 
