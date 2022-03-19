@@ -315,7 +315,7 @@ As seen above, it appears that the generally, higher tenure correlates with lowe
 
 
 
-<img src="../img/posts/Supervised Learning Capstone/Images/9_monthlycharges_totalcharges_cohorts.png">
+<img src="../img/posts/Supervised Learning Capstone/Images/8_tenure_churn_timeplot.png">
 
 The chart above appears to show that customers with higher tenure tend to have higher TotalCharges and MonthlyCharges. The TotalCharges trend makes sense, since older customers have had more pay cycles and thus have higher cumulative charges on their accounts. 
 
