@@ -179,26 +179,7 @@ corr_df['Churn_Yes'].sort_values().iloc[1:-1]
 |Contract_One year                         |-0.178225|
 |OnlineSecurity_Yes                        |-0.171270|
 |TechSupport_Yes                           |-0.164716|
-|Dependents_Yes                            |-0.163128|
-|Partner_Yes                               |-0.149982|
-|PaymentMethod_Credit card (automatic)     |-0.134687|
-|InternetService_DSL                       |-0.124141|
-|PaymentMethod_Bank transfer (automatic)   |-0.118136|
-|PaymentMethod_Mailed check                |-0.090773|
-|OnlineBackup_Yes                          |-0.082307|
-|DeviceProtection_Yes                      |-0.066193|
-|MultipleLines_No                          |-0.032654|
-|MultipleLines_No phone service            |-0.011691|
-|PhoneService_No                           |-0.011691|
-|gender_Male                               |-0.008545|
-|gender_Female                             | 0.008545|
-|PhoneService_Yes                          | 0.011691|
-|MultipleLines_Yes                         | 0.040033|
-|StreamingMovies_Yes                       | 0.060860|
-|StreamingTV_Yes                           | 0.063254|
-|StreamingTV_No                            | 0.128435|
-|StreamingMovies_No                        | 0.130920|
-|Partner_No                                | 0.149982|
+|...|...|
 |SeniorCitizen                             | 0.150541|
 |Dependents_No                             | 0.163128|
 |PaperlessBilling_Yes                      | 0.191454|
