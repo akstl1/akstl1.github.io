@@ -310,7 +310,7 @@ plt.ylabel('Churn Rate')
 ```
 
 <img src="../img/posts/Supervised Learning Capstone Images/8_tenure_churn_timeplot.png">
-<img src="../img/posts/Supervised Learning Capstone Images/8_tenure_churn_timeplot.png">
+<img src="../img/posts/Supervised Learning Capstone Images/9_monthlycharges_totalcharges_cohorts.png">
 
 
 <img src="../img/posts/Supervised Learning Capstone/Images/8_tenure_churn_timeplot.png">
