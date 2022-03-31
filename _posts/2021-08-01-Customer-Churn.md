@@ -583,3 +583,8 @@ Based on the models run, customer churn can be predicted with ~79% accuracy via 
 
 From our EDA, it appears that contract type in particular can be important in predicting churn. Specifically, customers who are on a month to month plan are more likely to churn than other contract types, and especially those who have had plans for 0-12 months.
 
+### Next Steps
+
+In the future, a company could use one of the above models to predict whether a customer is likely to churn. With this information, the company could then decide how (and whether) to intervene and prevent the customer from cancelling service.
+
+The company could also evaluate the factors most correlated with churn and determine whether they can alter their strategy and reduce churn from particular components of the business.
