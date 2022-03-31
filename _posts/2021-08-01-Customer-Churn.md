@@ -21,6 +21,8 @@ Based on the models run, customer churn can be predicted with ~79% accuracy via 
 
 From our EDA, it appears that contract type in particular can be important in predicting churn. Specifically, customers who are on a month to month plan are more likely to churn than other contract types, and especially those who have had plans for 0-12 months.
 
+In the future, a company could use models to predict whether a customer is likely to churn, enact an intervention strategy to prevent churn, and optimize business strategy to proactively minimize churn.
+
 ## Import required packages
 
 ``` python
@@ -121,7 +123,12 @@ df.drop('customerID', axis=1, inplace=True)
 Next I will generate a countplot of customer churn to see whether the target data is imbalanced.
 
 ``` python
+plt.figure(figsize=(15,5))
 sns.countplot(data=df, x='Churn')
+plt.grid(False)
+sns.set(rc={'figure.facecolor':'white'})
+plt.ylabel("Count")
+plt.xlabel("Churn Status")
 ```
 
 <img src="/img/posts/Supervised Learning Capstone Images/1_churn_count_plot.png">
@@ -131,7 +138,12 @@ Based on the above plot, I see that the data is imbalanced, with ~2.5x No's than
 Next I will plot customer churn vs TotalCharges via a violin plot. This can help me understand the distribution of the target variable and if there are any trends or target areas for further analysis.
 
 ``` python
+plt.figure(figsize=(15,5))
 sns.violinplot(data=df,y='TotalCharges',x='Churn')
+plt.grid(False)
+sns.set(rc={'figure.facecolor':'white'})
+plt.xlabel("Churn Status")
+plt.ylabel("Total Charges ($)")
 ```
 
 <img src="/img/posts/Supervised Learning Capstone Images/2_churn_violin_plot.png">
@@ -141,8 +153,12 @@ In the above, I see that there is a jump in TotalChares at ~$1000.
 Next, I will plot contract types vs TotalCharges, with a hue of Churn, in boxplots. This can help me determine whether contract type appears to have an influence on churn.
 
 ``` python
-plt.figure(figsize=(14,6))
+plt.figure(figsize=(15,5))
 sns.boxplot(data=df,x='Contract',y='TotalCharges',hue='Churn')
+plt.grid(False)
+sns.set(rc={'figure.facecolor':'white'})
+plt.xlabel("Contract Type")
+plt.ylabel("Total Charges ($)")
 ```
 <img src="/img/posts/Supervised Learning Capstone Images/3_contract_bar_plot.png">
 
@@ -198,6 +214,10 @@ corr_df['Churn_Yes'].sort_values().iloc[1:-1]
 plt.figure(figsize=(15,5))
 plt.xticks(rotation=90)
 sns.barplot(x=corr_df['Churn_Yes'].sort_values().iloc[1:-1].index, y=corr_df['Churn_Yes'].sort_values().iloc[1:-1].values)
+plt.grid(False)
+sns.set(rc={'figure.facecolor':'white'})
+plt.xlabel("Variables")
+plt.ylabel("Correlation with Churn")
 ```
 
 <img src="/img/posts/Supervised Learning Capstone Images/4_correlation_plot.png">
@@ -222,8 +242,12 @@ df['Contract'].unique()
 Next I will create a historgram displaying the distribution of the tenure column, which is the amount of time a customer has been / was a customer.
 
 ``` python
-plt.figure(figsize=(15,6))
+plt.figure(figsize=(15,5))
 sns.histplot(data=df,x='tenure',bins=25)
+plt.grid(False)
+sns.set(rc={'figure.facecolor':'white'})
+plt.xlabel("Tenure Bins (years)")
+plt.ylabel("Count")
 ```
 
 <img src="/img/posts/Supervised Learning Capstone Images/5_tenure_count.png">
@@ -233,8 +257,10 @@ There is a wide distribution of tenure in this dataset, with several apparent sp
 Next, I will plot tenure partitioned by each contract type and customer churn target values.
 
 ``` python
-plt.figure(figsize=(10,3),dpi=200)
-sns.displot(data=df,x='tenure',bins=70,col='Contract',row='Churn');
+plt.figure(figsize=(15,5),dpi=200)
+sns.displot(data=df,x='tenure',bins=70,col='Contract',row='Churn')
+plt.grid(False)
+sns.set(rc={'figure.facecolor':'white'})
 ```
 
 <img src="/img/posts/Supervised Learning Capstone Images/6_tenure_churn_contract_plots.png">
@@ -248,8 +274,12 @@ For one and two year contracts, there does not appear to be a spike or pattern i
 In addition to tenure, another characteristic at our disposal is the monthly charge figure. To see whether monthly charges have an impact on churn, I make a scatter plot of Total Charges vs Monthly Charges, and color hue by Churn.
 
 ``` python
-plt.figure(figsize=(10,5),dpi=200)
+plt.figure(figsize=(15,5),dpi=200)
 sns.scatterplot(data=df, x='MonthlyCharges', y='TotalCharges', hue='Churn')
+plt.grid(False)
+sns.set(rc={'figure.facecolor':'white'})
+plt.xlabel("Monthly Charges ($)")
+plt.ylabel("Total Charges ($)")
 ```
 
 <img src="/img/posts/Supervised Learning Capstone Images/7_monthlycharges_totalcharges.png">
@@ -287,8 +317,12 @@ churn_rate.transpose()['gender']
 With the above data created, I will now plot churn rate per month.
 
 ``` python
+plt.figure(figsize=(15,5))
 churn_rate.iloc[0].plot()
 plt.ylabel('Churn Rate')
+plt.grid(False)
+sns.set(rc={'figure.facecolor':'white'})
+plt.xlabel("Tenure (years)")
 ```
 
 <img src="/img/posts/Supervised Learning Capstone Images/8_tenure_churn_timeplot.png">
@@ -321,6 +355,10 @@ With the new cohort column created, I can now create a scatter plot of total cha
 ``` python
 plt.figure(figsize=(10,5),dpi=200)
 sns.scatterplot(data=df, x='MonthlyCharges', y='TotalCharges', hue='tenure_cohort', alpha=0.5)
+sns.set(rc={'figure.facecolor':'white'})
+plt.grid(False)
+plt.xlabel("Monthly Charges ($)")
+plt.ylabel("Monthly Charges ($)")
 ```
  
 <img src="/img/posts/Supervised Learning Capstone Images/9_monthlycharges_totalcharges_cohorts.png">
@@ -332,15 +370,20 @@ There could be several explanations for why newer customers tend to have lower r
 Since it appears that the cohorts are in clear 'bands' above, I will create a count plot showing the churn count per cohort to better quantify this trend.
 
 ``` python 
-plt.figure(figsize=(10,5),dpi=200)
-sns.countplot(data=df,x='tenure_cohort',hue='Churn',)
+plt.figure(figsize=(15,5),dpi=200)
+sns.countplot(data=df,x='tenure_cohort',hue='Churn')
+plt.grid(False)
+sns.set(rc={'figure.facecolor':'white'})
+plt.xlabel("Tenure Cohort")
+plt.ylabel("Count")
 ```
 
 <img src="/img/posts/Supervised Learning Capstone Images/10_cohort_churn_count.png">
 
 ``` python
-plt.figure(figsize=(15,20),dpi=200)
-g = sns.catplot(x="tenure_cohort", hue="Churn", col="Contract",data=df, kind="count");
+plt.figure(figsize=(15,5),dpi=200)
+g = sns.catplot(x="tenure_cohort", hue="Churn", col="Contract",data=df, kind="count")
+sns.set(rc={'figure.facecolor':'white'})
 ```
 
 <img src="/img/posts/Supervised Learning Capstone Images/11_tenure_cohort_churn_count.png">
@@ -401,8 +444,10 @@ grid.best_params_
 Use the best parameters to create a random forest model and assess its accuracy/metrics.
 
 ``` python
-preds = grid.predict(X_test)
+plt.figure(figsize=(15,5))
 plot_confusion_matrix(grid,X_test,y_test)
+plt.grid(False)
+sns.set(rc={'figure.facecolor':'white'})
 ```
 
 <img src="/img/posts/Supervised Learning Capstone Images/12_random_forest_confusion_plot.png">
@@ -462,7 +507,10 @@ y_pred = grid_model.predict(scaled_X_test)
 accuracy_score(y_test,y_pred)
 # accuracy: 0.7919431279620853
 
+plt.figure(figsize=(15,5))
 plot_confusion_matrix(grid_model,scaled_X_test,y_test)
+plt.grid(False)
+sns.set(rc={'figure.facecolor':'white'})
 ```
 <img src="/img/posts/Supervised Learning Capstone Images/13_logistic_confusion_plot.png">
 
@@ -495,7 +543,11 @@ grid_knn.best_params_
 # {'n_neighbors': 7}
 
 knn_preds = grid_knn.predict(scaled_X_test)
+
+plt.figure(figsize=(15,5))
 plot_confusion_matrix(grid_knn,scaled_X_test,y_test)
+plt.grid(False)
+sns.set(rc={'figure.facecolor':'white'})
 ```
 
 <img src="/img/posts/Supervised Learning Capstone Images/14_knn_confusion_plot.png">
