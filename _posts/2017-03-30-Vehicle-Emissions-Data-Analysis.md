@@ -221,6 +221,6 @@ ax[1].set_ylabel("IM240 Passing Rate (%)")
 ax[1].set_title("IM240 Test Passing Rate vs Model Year, by Testing Year")
 ```
 
-<img src="./emissions_imgs/1.png">
+<img src="/emissions_imgs/1.png">
 
 
