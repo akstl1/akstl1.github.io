@@ -389,7 +389,7 @@ pollution_degradation_df=pd.read_csv("./Pollution_Degradation_V2.csv")
 pollution_degradation_df[pollution_degradation_df["Model Year"]==1995].sort_values(by="testing_year").head(7)
 ```
 
-|Model Year|	First HC Result (g)|	Last HC Result (g)|	HC Result Difference (g)|	First NOx Result (g)|	Last NOx Result (g)|	NOx Result Difference (g)|	First CO Result (g)|	Last CO Result (g)|	CO Result Difference (g)|	testing_year|
+|row|Model Year|	First HC Result (g)|	Last HC Result (g)|	HC Result Difference (g)|	First NOx Result (g)|	Last NOx Result (g)|	NOx Result Difference (g)|	First CO Result (g)|	Last CO Result (g)|	CO Result Difference (g)|	testing_year|
 |---|---|---|---|---|---|---|---|---|---|---|---|
 |90|	1995|	0.831245|	0.683727|	0.147518|	1.479708|	1.338230|	0.141478|	8.007292|	6.861715|	1.145577|	2010|
 |75|	1995|	0.839182|	0.739528|	0.099654|	1.505301|	1.416771|	0.088530|	8.359716|	7.466390|	0.893326|	2011|
