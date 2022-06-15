@@ -243,7 +243,7 @@ def run_model(X_test,X_train, y_test,y_train, model):
     #return model metrics
     nl='\n'
     return (print(f'Model: {model} {nl}accuracy: {accuracy} {nl}precision: {precision} {nl}recall: {recall} {nl}F1 score: {f1}'))
-    ```
+```
 
 ## ---- Random Forest Model ----
 
@@ -490,7 +490,7 @@ Based on the above analysis, our models yielded the below performane:
 |Model|	Accuracy|	Precision|	Recall|	F1|
 |---|---|---|---|---|
 |Random Forest|	0.967|	0.938|	1.0|	0.968|
-|KNN|	0.961	0.962|	0.962|	0.962|
+|KNN|	0.961|	0.962|	0.962|	0.962|
 |Logistic Regression|0.849|0.814|0.914|0.861|
 
 Based on the above table, the Logistic Regression model did not perform as well as the other two models in any of the metrics.
