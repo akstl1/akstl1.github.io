@@ -15,10 +15,10 @@ While virtually anyone could be at risk for developing Parkinson’s, some resea
 
 More than 10 million people worldwide are affected by Parkinson's Disease in present day. Since there is no known cure for Parkinson's, doctors are collecting data to identify the disease earlier and develop better treatments or potential cures. In this analysis, I will use a set of patient data to predict a patient's likelihood of having Parkinson's Disease via several machine learning models.
 
-—- Results —-
+## —- Results —-
 After running several different models on the data, I determined that a random forest model was best able to predict Parkinson's Disease with an accuracy of 100% and F1 score of 100%.
 
-—- Data Source and Notes —-
+### —- Data Source and Notes —-
 Data source: https://www.kaggle.com/datasets/nidaguler/parkinsons-data-set
 
 Data column dictionary:
