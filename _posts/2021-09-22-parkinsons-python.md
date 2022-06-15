@@ -397,7 +397,7 @@ plt.show()
 
 In the above feature and permutation importance charts, it appears that Spraed 1, Spread 2 and PPE are consistently shown as highly important.
 
-Part 4 - POTENTIAL FUTURE WORK
+# Part 4 - POTENTIAL FUTURE WORK
 
 In the future, it would be interesting to conduct more analysis to build on the current model.
 
@@ -405,7 +405,7 @@ For example, the random forest model permutation importance analysis showed that
 
 It would also be interesting to test this model out on a larger data set or find data sets with additional fields to classify on. This data set is relatively small, and I would want to make sure that it generalizes well in larger data sets as well.
 
-Part 5 - CONCLUSION
+# Part 5 - CONCLUSION
 
 Parkinson’s disease is a brain disorder that causes unintended or uncontrollable movements, such as shaking, stiffness, and difficulty with balance and coordination. More than 10 million people worldwide are affected by Parkinson's Disease in present day. 
 
