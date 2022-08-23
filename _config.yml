@@ -9,7 +9,7 @@ plugins:
 #-------------------------------
 # General Site Settings
 title: Allan Khariton
-description: "I'm a Data Analyst II, and advancing in my career as a data professional.  My portfolio focuses on interesting projects I've recently undertaken, with a strong emphasis on business impact. You can view my projects in the posts below, and visit my Github & LinkedIn pages (or download my Resume) by using the links below."
+description: "I'm a Data Analyst II, and advancing in my career as a data professional.  My portfolio focuses on interesting projects I've recently undertaken, with a strong emphasis on business impact and learning new tools & languages. You can view my projects in the posts below, and visit my Github & LinkedIn pages (or download my Resume) by using the links below."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
@@ -17,7 +17,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # About Section
 subtitle: Data Science <span style="color:#f58506"> Portfolio </span>
 location: "Boston, USA"
-resume_url: /docs/A_Khariton_Resume_2022.05.17.pdf
+resume_url: /docs/A_Khariton_Resume_2022.08.22.pdf
 avatar_image: /img/Head Shot.jpg
 
 #-------------------------------
