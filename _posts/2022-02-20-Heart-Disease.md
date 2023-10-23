@@ -15,7 +15,7 @@ Given the disease's prevelence and series symptoms, doctors are collecting data 
 To do this, I will clean data and then utilize different machine learning models to predict a patient's risk of having heart disease. I will then take the most successful model and deploy it so others could, in theory, use it to predict this risk in real time.
 
 ## ---- Results ----
-After running several different models on the data, I determined that a random forest model was best able to predict heart disease risk with an accuracy of 96.6% and F1 score of 96.8%. With this finding, I then deployed the model to Heroku so others could (theoretically) use it for prediction purposes. The deployed model can be accessed via this link: <a href="https://heart-disease-prediction-ak.herokuapp.com/">Heart Disease Prediction Website</a>
+After running several different models on the data, I determined that a random forest model was best able to predict heart disease risk with an accuracy of 96.6% and F1 score of 96.8%. With this finding, I then deployed the model to Heroku so others could (theoretically) use it for prediction purposes. The deployed model can be accessed via this link: <a href="https://heart-disease-prediction-ak.streamlit.app/">Heart Disease Prediction Website</a>
 
 Note this project can also be viewed at the Github repository in the following link: <a href="https://github.com/akstl1/heart-disease-prediction-deployment">Project Repo Link</a>
 
