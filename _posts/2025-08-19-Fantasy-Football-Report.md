@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Fantasy Football Analytics
-image: "/posts/heart_disease_1.jpg"
+image: "/posts/leaguelogo.png"
 tags: [Python, Power BI, Analytics]
 ---
 
