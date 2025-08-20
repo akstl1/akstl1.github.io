@@ -8,24 +8,16 @@ tags: [Python, Power BI, Analytics]
 # Part 1 - INTRODUCTION
 The Fantasy League industry has been booming since the early 2000s, jumping from an estimated 15 million players in 2003 to over 65 million in recent years. ESPN's Fantasy Football League hosted over 13 million players in its program in 2024 alone according to its internal analytics. Last year I took part in a fantasy league myself, and it sparked me to make my own analytics based on available league data. The league itself was a standard PPR setup, with 12 total participants.
 
-Heart disease describes a variety of related conditions such as Coronary Artery Disease, Acute coronary syndrome, Angina, and Aortic Anuerism. Heart disease can lead to numerous detrimental or fatal conditions such as diabetes, heart failure, and heart attack.
-
-It is the leading cause of death in the Unites States, according to the CDC. Roughly 660,000 - 700,00 people in the US die each year from heart disease, which is about one-quarter of all yearly deaths. Approximately 18 million people wordwide die due to heart disease annually, which is about 32% of all deaths.
-
-Given the disease's prevelence and series symptoms, doctors are collecting data from patients to assess a patient's risk for heart disease and prevent it if possible. In this analysis, I will use a set of patient data and use it to predict a patient's risk for having heart disease.
-
-To do this, I will clean data and then utilize different machine learning models to predict a patient's risk of having heart disease. I will then take the most successful model and deploy it so others could, in theory, use it to predict this risk in real time.
-
-## ---- Results ----
 After some research, I discovered that ESPN has an API which I could use to extract data efficiently. Using Python, I was able to ETL data into Power BI and create visuals/analysis on our league's draft, match results, team performance, and playoff performance.
 
-A few insights I gleaned from the data included:
+## ---- Results ----
+A few insights I gleaned from the loaded data included:
 
 Draft order had little correlation to in-season success. The 9-11 slots in our 12 person league all ended up making deep playoff runs, with the #11 slot winning it all in the end. Though the top picks did snag several high-performing players, there was also significant variability that stunted the potential of these teams - for example, consensus #1 pick C. McCaffrey getting injured at the start of the season and missing most of the year. Additionally, the team managers that went far in the playoffs tended to have more football knowledge and were more actively swapping their players week-to-week.
 
 ESPN did a fairly good job at predicting matchup results. 75% of matches ended with their predicted win/loss result. Even with this impressive prediction rate, there was a lot of variability within the actual match differentials. ESPN's average margin of victory was different from actual results by an average of 24 points, with 50% of the data being between the first and third quartiles of 8 and 38 points. 
 
-<iframe title="Fantasy Football 2024 Report PBIR" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=f22aa70e-ecdd-40a4-b0d1-25e744986334&autoAuth=true&ctid=5c9496d4-8388-4986-b61c-4952186658da" frameborder="0" allowFullScreen="true"></iframe>
+<iframe title="Fantasy Football 2024 Report PBIR" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiZWQ5NDliZjgtNjdjOC00MzU2LThmMDYtNmMwZWYzNmNiNGFmIiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9" frameborder="0" allowFullScreen="true"></iframe>
 
 After running several different models on the data, I determined that a random forest model was best able to predict heart disease risk with an accuracy of 96.6% and F1 score of 96.8%. With this finding, I then deployed the model to Heroku so others could (theoretically) use it for prediction purposes. The deployed model can be accessed via this link: <a href="https://heart-disease-prediction-ak.streamlit.app/">Heart Disease Prediction Website</a>
 
