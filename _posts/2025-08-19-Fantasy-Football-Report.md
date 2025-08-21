@@ -17,7 +17,7 @@ Draft order had little correlation to in-season success. The 9-11 slots in our 1
 
 ESPN did a fairly good job at predicting matchup results. 75% of matches ended with their predicted win/loss result. Even with this impressive prediction rate, there was a lot of variability within the actual match differentials. ESPN's average margin of victory was different from actual results by an average of 24 points, with 50% of the data being between the first and third quartiles of 8 and 38 points. 
 
-You can view the final BI dashboard below, or via this link: <a href="https://app.powerbi.com/viewr=eyJrIjoiZWQ5NDliZjgtNjdjOC00MzU2LThmMDYtNmMwZWYzNmNiNGFmIiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9">Dashboard Link</a>
+You can view the final BI dashboard below, or via this link: <a href="https://app.powerbi.com/view?r=eyJrIjoiZWQ5NDliZjgtNjdjOC00MzU2LThmMDYtNmMwZWYzNmNiNGFmIiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9">Dashboard Link</a>
 
 <iframe title="Fantasy Football 2024 Report PBIR" width="900" height="600" align="center" src="https://app.powerbi.com/view?r=eyJrIjoiZWQ5NDliZjgtNjdjOC00MzU2LThmMDYtNmMwZWYzNmNiNGFmIiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9" frameborder="0" allowFullScreen="true"></iframe>
 
