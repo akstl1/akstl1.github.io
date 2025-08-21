@@ -52,7 +52,7 @@ league = League(league_id=os.getenv("LEAGUE_ID"), year=int(os.getenv("YEAR")), e
 curr_week=league.current_week
 ```
 
-# Part 2 - DATAVISUALIZATION REQUIREMENTS AND DATA INGESTION
+# Part 2 - DATA REQUIREMENTS AND INGESTION
 
 When outlining the report I wanted to build, I focused on 6 key concepts: power rankings, draft, scoreboard/standings, matchup details, individual team performance and final playoff bracket.
 
@@ -74,7 +74,7 @@ Outside the context of an individual matchup, it's important to undrestand a tea
 ## ---- Final League Playoff Bracket ----
 One of the most anticipated parts of a season are the playoffs. Most leagues offer players a reward for having deep playoff runs, so I wanted to make sure to capture each playoff matchup and highlight the victor of the league for the year.
 
-## Ingestion and Transform of Data
+## ---- Ingestion and Transform of Data ----
 To perform the ETL processes required to make the above visuals, I leveraged ESPN's APIs and Python to create a set of functions. These functions could be used to get stats regarding the league draft, individual week results, and results for multiple weeks in case a bulk add of data is required. With the set of 13 functions I created, I made it possible to ingest data for any number of league weeks within a few seconds as Excel files.
 
 The code for these functions can be viewed in the espn_api_functions.py file within the above linked Github repo.
