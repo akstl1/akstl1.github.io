@@ -2,20 +2,27 @@
 layout: post
 title: Fantasy Football Analytics
 image: "/posts/leaguelogo.png"
-tags: [Python, Power BI, Analytics]
+tags: [Python, Power BI, APIs, Analytics]
 ---
 
 # Part 1 - Introduction
 The Fantasy League industry has been booming since the early 2000s, jumping from an estimated 15 million players in 2003 to over 65 million in recent years. ESPN's Fantasy Football League hosted over 13 million players in its program in 2024 alone according to its internal analytics. Last year I took part in a fantasy league myself, and it sparked me to make my own analytics based on available league data. The league itself was a standard PPR setup, with 12 total participants.
 
-After some research, I discovered that ESPN has an API which I could use to extract data efficiently. Using Python, I was able to ETL data into Power BI and create visuals/analysis on our league's draft, match results, team performance, and playoff performance.
+After some research, I discovered that ESPN has an API which I could use to extract data efficiently. Using Python, I was able to ETL data into Power BI and create visuals/analysis on our league's draft, match results, team performance, and playoff bracket.
+
+Overall, this project was meaningful to me because:
+- I got to combine my technical interests of utilizing Python data techniques and Power BI visualization knowledge with my lifelong interest of sports
+- I was able to refresh my ability to look up documentation for, and query, APIs effectively
+- I finally got to test out Gregor Brunner's <a href="https://en.brunner.bi/measurekiller">Measure Killer application</a>, which helped me clean up my data model at the end of the project
 
 ## ---- Results ----
 A few insights I gleaned from the loaded data included:
 
 Draft order had little correlation to in-season success. The 9-11 slots in our 12 person league all ended up making deep playoff runs, with the #11 slot winning it all in the end. Though the top picks did snag several high-performing players, there was also significant variability that stunted the potential of these teams - for example, consensus #1 pick C. McCaffrey getting injured at the start of the season and missing most of the year. Additionally, the team managers that went far in the playoffs tended to have more football knowledge and were more actively swapping their players week-to-week.
 
-ESPN did a fairly good job at predicting matchup results. 75% of matches ended with their predicted win/loss result. Even with this impressive prediction rate, there was a lot of variability within the actual match differentials. ESPN's average margin of victory was different from actual results by an average of 24 points, with 50% of the data being between the first and third quartiles of 8 and 38 points. 
+Secondly, ESPN did a fairly good job at predicting matchup outcomes. 75% of matches ended with their predicted win/loss result. Even with this impressive prediction rate, there was a lot of variability within the actual match point differentials. ESPN's average margin of victory was different from actual results by an average of 24 points, with 50% of the differentials being between 8 and 38 points. As an aside, the largest margin of victory was an astounding 102 points.
+
+
 
 You can view the final BI dashboard below, or via this link: <a href="https://app.powerbi.com/view?r=eyJrIjoiZWQ5NDliZjgtNjdjOC00MzU2LThmMDYtNmMwZWYzNmNiNGFmIiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9">Dashboard Link</a>
 
