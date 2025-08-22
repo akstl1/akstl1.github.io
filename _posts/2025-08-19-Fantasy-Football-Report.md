@@ -5,7 +5,7 @@ image: "/posts/leaguelogo.png"
 tags: [Python, Power BI, Analytics]
 ---
 
-# Part 1 - INTRODUCTION
+# Part 1 - Introduction
 The Fantasy League industry has been booming since the early 2000s, jumping from an estimated 15 million players in 2003 to over 65 million in recent years. ESPN's Fantasy Football League hosted over 13 million players in its program in 2024 alone according to its internal analytics. Last year I took part in a fantasy league myself, and it sparked me to make my own analytics based on available league data. The league itself was a standard PPR setup, with 12 total participants.
 
 After some research, I discovered that ESPN has an API which I could use to extract data efficiently. Using Python, I was able to ETL data into Power BI and create visuals/analysis on our league's draft, match results, team performance, and playoff performance.
@@ -19,7 +19,7 @@ ESPN did a fairly good job at predicting matchup results. 75% of matches ended w
 
 You can view the final BI dashboard below, or via this link: <a href="https://app.powerbi.com/view?r=eyJrIjoiZWQ5NDliZjgtNjdjOC00MzU2LThmMDYtNmMwZWYzNmNiNGFmIiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9">Dashboard Link</a>
 
-<iframe title="Fantasy Football 2024 Report PBIR" width="900" height="560.25" align="center" src="https://app.powerbi.com/view?r=eyJrIjoiZWQ5NDliZjgtNjdjOC00MzU2LThmMDYtNmMwZWYzNmNiNGFmIiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9" frameborder="0" allowFullScreen="true"></iframe>
+<p align="center"><iframe title="Fantasy Football 2024 Report PBIR" width="900" height="560.25" align="center" src="https://app.powerbi.com/view?r=eyJrIjoiZWQ5NDliZjgtNjdjOC00MzU2LThmMDYtNmMwZWYzNmNiNGFmIiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9" frameborder="0" allowFullScreen="true"></iframe></p>
 
 Note the code for this project can also be viewed in this Github repository: <a href="https://github.com/akstl1/jonesfantasyfootball">Project Repo Link</a>
 
@@ -52,7 +52,7 @@ league = League(league_id=os.getenv("LEAGUE_ID"), year=int(os.getenv("YEAR")), e
 curr_week=league.current_week
 ```
 
-# Part 2 - DATA REQUIREMENTS AND INGESTION
+# Part 2 - Data Requirements & Ingestion
 
 When outlining the report I wanted to build, I focused on 6 key concepts: power rankings, draft, scoreboard/standings, matchup details, individual team performance and final playoff bracket.
 
@@ -83,12 +83,12 @@ After generating files with the above functions, I loaded each table into Power 
 
 Once done transforming my data, I used Power BI's modelling features to link tables together like a relational database so that I could effectively build visuals and measures for the report.
 
-# Part 3 - POTENTIAL FUTURE WORK
+# Part 3 - Potential Future Work
 
 In the future, it would be interesting to conduct more analysis to build on the current model.
 
 For example, since there were no trades during this league year there wasn't any analysis to be done there. If trades are initiated next year, it would be interesting to create a trade report and analyze approvals/denials. Additionally, I think it would be insightful to see whether there is any impact on a team's frequency of adding/dropping players on their overall performance.
 
-# Part 4 - CONCLUSION
+# Part 4 - Conclusion
 
 Playing in Fantasy Leagues has become a staple of many peoples' lives over the last 2 decades, and with the rise in leagues there is a wealth of data available to be analyzed from league hosts like ESPN. After joining a league last year, I wanted to visualize the performance of our teams and learned how to efficiently extract league data with Python via ESPN's API. Using custom-built funcitons, I developed a method to extract data and create a Power BI dashboard/analysis on our league's draft, match results, team performance, and playoff performance.
