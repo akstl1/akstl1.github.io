@@ -43,21 +43,7 @@ The API provides access to league information, provided you have your league's E
 - Matchup Class: Provides information about the final score and lineup for a given matchup
 - Activity Class: provides details on trades and drops/adds during the season
 
-For this project, I used each class except the Activity class for my analysis since no trades were initated by any team.
-
-## ---- Import Libraries for Project ----
-```python
-from espn_api.football import League
-import pandas as pd
-import numpy as np
-from dotenv import load_dotenv
-import os
-load_dotenv()
-from espn_api_functions import curr_week, hundredyardgame, threehundredyardpassinggame, draft, powerRankingsSingleWeek, powerRankingsMultiWeek, standingsSingleWeek, standingsMultiWeek, matchupsSingleWeek, matchupsMultiWeek, playerStatsSingleWeek, playerStatsMultiWeek, fantasy_teams
-
-league = League(league_id=os.getenv("LEAGUE_ID"), year=int(os.getenv("YEAR")), espn_s2=os.getenv("S2"),swid=os.getenv("SWID"))
-curr_week=league.current_week
-```
+For this project, I used each class except the Activity class since no trades were initated by any team.
 
 # Part 2 - Data Requirements & Ingestion
 
