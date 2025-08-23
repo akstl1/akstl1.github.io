@@ -6,7 +6,7 @@ tags: [Python, Power BI, APIs, Analytics]
 ---
 
 # Part 1 - Introduction
-The Fantasy League industry has been booming since the early 2000s, jumping from an estimated 15 million players in 2003 to over 65 million in recent years. ESPN's Fantasy Football League hosted over 13 million players in its 2024 program alone according to its internal analytics. Last year I took part in a fantasy league myself, and it sparked me to make my own analytics based on available league data. The league itself was a standard PPR setup, with 12 total participants.
+The Fantasy League industry has been booming since the early 2000s, jumping from an estimated 15 million players in 2003 to over 65 million in recent years. ESPN's Fantasy Football League hosted over 13 million players in its 2024 program alone according to its internal analytics. Last year I took part in an ESPN 12-person PPR fantasy football league, and it sparked me to develop some analytics based on available league data.
 
 Initially, I set out to manually record our league's data for this project. After realizing that this would require a daunting amount of effort and conducting some research, I discovered that ESPN has an API which I could use to extract data much more efficiently. Using Python, I was able to ETL data into Power BI and create visuals/analysis on our league's draft, match results, team performance, and playoff bracket.
 
