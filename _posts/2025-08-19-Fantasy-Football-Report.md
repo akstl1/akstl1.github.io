@@ -68,7 +68,7 @@ Outside the context of an individual matchup, it's important to undrestand a tea
 One of the most anticipated parts of the season are the playoffs. Most leagues offer players a reward for having deep playoff runs, so I wanted to make sure to capture each playoff matchup and highlight the league victor.
 
 ## ---- Ingestion and Transform of Data ----
-To perform the ETL processes required to make the above visuals, I leveraged ESPN's APIs and Python to create functions could get stats regarding the league draft, individual week results, and multi-week results in case a bulk data export is required. With the set of 13 functions I created, I made it possible to ingest data for any number of league weeks within a few seconds as Excel files.
+To perform the ETL processes required to make the above visuals, I leveraged ESPN's APIs and Python to create functions that could get stats regarding the league draft, individual week results, and multi-week results in case a bulk data export is required. With the set of 13 functions I created, I made it possible to ingest data for any number of league weeks within a few seconds as Excel files.
 
 The code for these functions can be viewed in the espn_api_functions.py file within the above linked Github repo.
 
