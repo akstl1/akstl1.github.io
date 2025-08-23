@@ -56,25 +56,25 @@ Power Rankings are an estimate of a team's strength and forecast going forward. 
 The draft is a key component of any league. In addition to being a fun way to kick off the league year, typically during the draft a large proportion of high-value players are chosen by the participating teams. In our 12-person league, each team got 17 picks for a total of 204 player selections. To visualize how the draft progressed and get a sense of each player's strategy, I chose to visualize both each team's individual choices and player type breakdown and built a matrix of the full draft board.
 
 ## ----Weekly Scoreboard & Standings ----
-To get an overview of how each week is progressing, I wanted to display how each matchup turned out and how that impacted the overall league standings for the week.
+To get an overview of how each week progressed, I wanted to display how each matchup turned out and how that impacted the overall league standings for the week.
 
 ## ----Matchup Details & Box Scores ----
 Beyond a scoreboard overview, I wanted to provide analysis on each matchup so I could review key players and statistics and determine whether any lineup changes may be needed in the future. To do so, I created visuals to show each team's top performers, key scoring measurements, performance in each point category and a player detail bookmark to see a better breakdown of individual performance.
 
 ## ---- Individual Team Performance ----
-Outside the context of an individual matchup, it's important to undrestand a team's season-to-date performance and get context on how a team is performing compared to ESPN expectations and other teams. This was also an opportunity to provide more narrative analysis on a team's match results to date.
+Outside the context of an individual matchup, it's important to undrestand a team's season-to-date performance and get insight on how a team is performing compared to ESPN expectations and other teams. This was also an opportunity to provide more narrative analysis on a team's match results to date.
 
 ## ---- Final League Playoff Bracket ----
-One of the most anticipated parts of a season are the playoffs. Most leagues offer players a reward for having deep playoff runs, so I wanted to make sure to capture each playoff matchup and highlight the victor of the league for the year.
+One of the most anticipated parts of the season are the playoffs. Most leagues offer players a reward for having deep playoff runs, so I wanted to make sure to capture each playoff matchup and highlight the league victor.
 
 ## ---- Ingestion and Transform of Data ----
-To perform the ETL processes required to make the above visuals, I leveraged ESPN's APIs and Python to create a set of functions. These functions could be used to get stats regarding the league draft, individual week results, and results for multiple weeks in case a bulk add of data is required. With the set of 13 functions I created, I made it possible to ingest data for any number of league weeks within a few seconds as Excel files.
+To perform the ETL processes required to make the above visuals, I leveraged ESPN's APIs and Python to create functions could get stats regarding the league draft, individual week results, and multi-week results in case a bulk data export is required. With the set of 13 functions I created, I made it possible to ingest data for any number of league weeks within a few seconds as Excel files.
 
 The code for these functions can be viewed in the espn_api_functions.py file within the above linked Github repo.
 
-After generating files with the above functions, I loaded each table into Power BI and performed some final data manipulations using BI's M Language. These final transforms allowed me to create new columns, tables based off the original Python code, and join tables together to get a better breakdown of my desired attributes.
+After generating data files with the above functions, I loaded each table into Power BI and performed final data manipulations using Power BI's M Language. These final transforms allowed me to create new columns, new tables based off the original Python code, and join tables together to get a better breakdown of my desired attributes.
 
-Once done transforming my data, I used Power BI's modelling features to link tables together like a relational database so that I could effectively build visuals and measures for the report.
+Once done transforming my data, I used Power BI's modelling features to link tables together like a relational database so that I could effectively build visuals and measures in DAX for the report.
 
 # Part 3 - Potential Future Work
 
