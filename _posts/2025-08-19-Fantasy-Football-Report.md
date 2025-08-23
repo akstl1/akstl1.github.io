@@ -53,7 +53,7 @@ When outlining the report I wanted to build, I focused on 6 key concepts: power 
 Power Rankings are an estimate of a team's strength and forecast going forward. To help understand how teams in the league are projected to perform in future weeks and how a team's stength has changed over time, I wanted to plot initial and current power rankings for each team.
 
 ## ----League Draft ----
-The draft is a key component of any league. In addition to being a fun way to kick off the league year, typically during the draft a large proportion of high-value players are chosen by the participating teams. In our 12-person league, each team got 17 picks for a total of 204 player selections. To visualize how the draft progressed and get a sense of each player's strategy, I chose to visualize both each team's individual choices and player type breakdown as well as providing a matrix of the full draft board.
+The draft is a key component of any league. In addition to being a fun way to kick off the league year, typically during the draft a large proportion of high-value players are chosen by the participating teams. In our 12-person league, each team got 17 picks for a total of 204 player selections. To visualize how the draft progressed and get a sense of each player's strategy, I chose to visualize both each team's individual choices and player type breakdown and built a matrix of the full draft board.
 
 ## ----Weekly Scoreboard & Standings ----
 To get an overview of how each week is progressing, I wanted to display how each matchup turned out and how that impacted the overall league standings for the week.
