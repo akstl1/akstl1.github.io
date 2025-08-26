@@ -28,7 +28,7 @@ You can view the final BI dashboard below, or via this link: <a href="https://ap
 
 The code for this project can also be viewed in this Github repository: <a href="https://github.com/akstl1/jonesfantasyfootball">Project Repo Link</a>
 
-<p align="center"><iframe title="Fantasy Football 2024 Report PBIR" width="900" height="560.25" align="center" src="https://app.powerbi.com/view?r=eyJrIjoiZWQ5NDliZjgtNjdjOC00MzU2LThmMDYtNmMwZWYzNmNiNGFmIiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9" frameborder="0" allowFullScreen="true"></iframe></p>
+<p align="center"><iframe title="Fantasy Football 2024 Report PBIR" width="80%" height="560.25" align="center" src="https://app.powerbi.com/view?r=eyJrIjoiZWQ5NDliZjgtNjdjOC00MzU2LThmMDYtNmMwZWYzNmNiNGFmIiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9" frameborder="0" allowFullScreen="true"></iframe></p>
 
 ## ---- Data Source and Notes ----
 Data source: The data for this project was collected via ESPN's API, and I used the <a href="https://github.com/cwendt94/espn-api/wiki">wiki linked here</a> to access its documentation.
