@@ -41,7 +41,7 @@ Data source: The data for this project was my own measurements and data inputs, 
 The Excel tables provide all key information required for this report, including:
 - Rubber Duck purchase details - purchaser/location/date
 - Rubber Duck dimensions - length/width/height/weight
-- Rubber Duck personality details = name/catch phrase
+- Rubber Duck personality details - name/catch phrase
 - Location details - list of purchase location metadata so everyone can collect
 
 # Part 2 - Data Requirements & Ingestion
