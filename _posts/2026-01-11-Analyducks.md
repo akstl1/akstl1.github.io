@@ -29,11 +29,11 @@ My rubber ducks have been to more countries than I have due to some generous don
 
 And as a bonus insight - taking pictures of 200+ ducks all at once can be tedious and time-consuming, if you are replicating this I would highly recommend collecting this data as you go rather than batching it.
 
-You can view the final BI dashboard below, or via this link: <a href="https://app.powerbi.com/view?r=eyJrIjoiZWQ5NDliZjgtNjdjOC00MzU2LThmMDYtNmMwZWYzNmNiNGFmIiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9">Dashboard Link</a>
+You can view the final BI dashboard below, or via this link: <a href="https://app.powerbi.com/view?r=eyJrIjoiNzM4MWJjZTYtOGQ5OC00MWM1LWE4M2EtNDVlNGFkZWY3MmY5IiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9">Dashboard Link</a>
 
 The code for this project can also be viewed in this Github repository: <a href="https://github.com/akstl1/Analyducks">Project Repo Link</a>
 
-<p align="center"><iframe title="Fantasy Football 2024 Report PBIR" width="80%" height="560.25" align="center" src="https://app.powerbi.com/view?r=eyJrIjoiZWQ5NDliZjgtNjdjOC00MzU2LThmMDYtNmMwZWYzNmNiNGFmIiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9" frameborder="0" allowFullScreen="true"></iframe></p>
+<p align="center"><iframe title="Fantasy Football 2024 Report PBIR" width="80%" height="560.25" align="center" src="https://app.powerbi.com/view?r=eyJrIjoiNzM4MWJjZTYtOGQ5OC00MWM1LWE4M2EtNDVlNGFkZWY3MmY5IiwidCI6IjVjOTQ5NmQ0LTgzODgtNDk4Ni1iNjFjLTQ5NTIxODY2NThkYSIsImMiOjF9" frameborder="0" allowFullScreen="true"></iframe></p>
 
 ## ---- Data Source and Notes ----
 Data source: The data for this project was my own measurements and data inputs, currently stored in an excel file.
